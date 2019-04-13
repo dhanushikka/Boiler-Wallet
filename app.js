@@ -36,6 +36,10 @@ app.get('/about', (req,res) => {
     res.render('ABOUT');
 });
 
+app.get('/contact', (req,res) => {
+    res.render('CONTACT');
+});
+
 const port = 5061;
 
 app.listen(port, () => {
