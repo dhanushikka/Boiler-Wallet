@@ -14,8 +14,6 @@ client.connect(err => {
   client.close();
 });
 
-
-
 // telling the system we want to use handlebars template engine
 app.engine('handlebars', exphbs({
     defaultLayout: 'main'
@@ -29,7 +27,7 @@ app.use(function(req,res,next){
 
 app.get('/', (req,res) => {
     const title = 'Passing a variable into the view';
-    res.render('index', {
+    res.render('login', {
         title:title
     }); 
 });
