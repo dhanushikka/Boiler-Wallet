@@ -14,11 +14,14 @@ var dbConnection = mongoose.connect('mongodb+srv://dravicha:cs252@boiler-wallet-
 .then(()=> console.log('Mongo connected'))
 .catch(err => console.log(err));
 
+var currentUserCodes, currentUserName;
 
 require('./models/User');
 require('./models/Club');
+require('./models/Expenses');
 const User = mongoose.model('Users');
 const Club = mongoose.model('Clubs');
+const Expenses = mongoose.model('Expenses');
 
 // telling the system we want to use handlebars template engine
 app.engine('handlebars', exphbs({
@@ -45,7 +48,6 @@ app.get('/', (req,res) => {
 });
 
 app.get('/about', (req,res) => {
-    getClubs();
     res.render('ABOUT');
 });
 
@@ -64,6 +66,35 @@ app.get('/clubs', (req,res) => {
             });
         }
     });   
+});
+
+app.get('/myclubs', (req,res) => {
+    var clubList = [];
+
+    Club.find({}, function (err, myClubs){
+        if(myClubs!=null){
+            clubList = getmyClubs(myClubs,currentUserCodes);
+        }
+        res.render('clubs',{
+           clubList:clubList 
+        });
+        console.log(clubList);
+    });     
+});
+
+app.get('/expenses', (req, res) => {
+    //var clubSelected = req.body.title; //title of club clicked
+    //var clubCode = req.body.code;
+
+
+    console.log(currentUserName);
+    //console.log(code);
+
+    var queryRes = Expenses.find({user: currentUserName}, function(err, myExpenses) {
+        
+    });
+    console.log(queryRes);
+
 });
 
 app.post('/sign-in-submit', (req, res) => {
@@ -90,6 +121,8 @@ app.post('/sign-in-submit', (req, res) => {
         User.findOne({email: req.body.email}, function (err, myUser) {
             if (myUser != null){
                 if(pass === myUser.password){
+                    currentUserCodes = myUser.codes;
+                    currentUserName = myUser.name;
                     res.redirect('clubs');
                 }
                 else{
@@ -132,4 +165,27 @@ function getClubs(myClubs){
        clubList.push(myClubs[i].title);
     }
    return clubList;
+}
+
+function getmyClubs(clubs, codes){
+    let clubList = []; 
+    const ilen = codes.length;
+    const jlen = clubs.length;
+   for(var i = 0; i < ilen; i++){
+       for(var j = 0; j < jlen ; j++){
+            if(codes[i] === clubs[j].code){
+                clubList.push(clubs[j].title);
+            }
+       }
+   }
+   return clubList;
+}
+
+/* 
+    function to get the list of expesnes by specific user
+*/
+
+function getExpenses(code, club, user) {
+    let clubExpenses = [];
+    const
 }
