@@ -1,0 +1,40 @@
+.container-fluid {
+    padding: 60px 50px;
+    text-align: center;
+  }
+
+body {
+    background-color: black;
+}
+
+div.navbar, #navbar {
+    overflow: hidden;
+    background: none;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    margin: 0px;
+    opacity: 50%;
+  }
+  
+  /* Navbar links */
+  #navbar a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px;
+    text-decoration: none;
+  }
+
+.col-sm-4 {
+    display: inline-block;
+    margin: 25px 0;
+    width: 200px;
+    height: 300px;
+}
+
+img {
+    width: 250px;
+    height: 350px;
+}
