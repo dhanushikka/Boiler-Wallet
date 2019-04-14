@@ -16,7 +16,9 @@ var dbConnection = mongoose.connect('mongodb+srv://dravicha:cs252@boiler-wallet-
 
 
 require('./models/User');
+require('./models/Club');
 const User = mongoose.model('Users');
+const Club = mongoose.model('Clubs');
 
 // telling the system we want to use handlebars template engine
 app.engine('handlebars', exphbs({
@@ -43,6 +45,7 @@ app.get('/', (req,res) => {
 });
 
 app.get('/about', (req,res) => {
+    getClubs();
     res.render('ABOUT');
 });
 
@@ -50,8 +53,19 @@ app.get('/contact', (req,res) => {
     res.render('CONTACT');
 });
 
+
+
 app.get('/clubs', (req,res) => {
-    res.render('clubs');
+    var clubList;
+    Club.find({}, function (err, myClubs){
+        if(myClubs!=null){
+            clubList = getClubs(myClubs);
+            console.log(clubList);
+            res.render('clubs', {
+                clubList:clubList
+            });
+        }
+    });   
 });
 
 app.post('/sign-in-submit', (req, res) => {
@@ -109,3 +123,15 @@ const port = 5061;
 server = app.listen(port, () => {
     console.log(`Server started: ${port}`);
 });
+
+/* 
+    function to get the list of clubs
+*/
+function getClubs(myClubs){
+    let clubList = []; 
+    var length = myClubs.length;
+    for(var i = 0; i < length ; i++){
+       clubList.push(myClubs[i].title);
+    }
+   return clubList;
+}
