@@ -48,15 +48,12 @@ app.get('/', (req,res) => {
 });
 
 app.get('/about', (req,res) => {
-    getClubs();
     res.render('ABOUT');
 });
 
 app.get('/contact', (req,res) => {
     res.render('CONTACT');
 });
-
-
 
 app.get('/clubs', (req,res) => {
     var clubList;
@@ -71,17 +68,32 @@ app.get('/clubs', (req,res) => {
     });   
 });
 
+app.get('/myclubs', (req,res) => {
+    var clubList = [];
+
+    Club.find({}, function (err, myClubs){
+        if(myClubs!=null){
+            clubList = getmyClubs(myClubs,currentUserCodes);
+        }
+        res.render('clubs',{
+           clubList:clubList 
+        });
+        console.log(clubList);
+    });     
+});
+
 app.get('/expenses', (req, res) => {
-    console.log(req.body);
     //var clubSelected = req.body.title; //title of club clicked
     //var clubCode = req.body.code;
-    //var userName;
 
-    //console.log(clubSelected);
+
+    console.log(currentUserName);
     //console.log(code);
 
-    //var queryRes = Expenses.find({user: userName});
-    //console.log(queryRes);
+    var queryRes = Expenses.find({user: currentUserName}, function(err, myExpenses) {
+        
+    });
+    console.log(queryRes);
 
 });
 
@@ -155,10 +167,25 @@ function getClubs(myClubs){
    return clubList;
 }
 
+function getmyClubs(clubs, codes){
+    let clubList = []; 
+    const ilen = codes.length;
+    const jlen = clubs.length;
+   for(var i = 0; i < ilen; i++){
+       for(var j = 0; j < jlen ; j++){
+            if(codes[i] === clubs[j].code){
+                clubList.push(clubs[j].title);
+            }
+       }
+   }
+   return clubList;
+}
+
 /* 
     function to get the list of expesnes by specific user
 */
 
 function getExpenses(code, club, user) {
-
+    let clubExpenses = [];
+    const
 }
