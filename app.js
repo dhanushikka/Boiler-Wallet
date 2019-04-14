@@ -128,31 +128,6 @@ app.get('/contact', (req,res) => {
     res.render('CONTACT');
 });
 
-app.post('/login', (req,res) =>{
-    console.log(req.body);
-    res.send('ok');
-
-    let errors = [];
-
-    if(!req.body.email){
-        errors.push({text: 'Missing email address'});
-    }
-    if(!req.body.password){
-        errors.push({text: 'Missing password'});
-    }
-
-    if(errors.length > 0){
-        res.render('/', {
-            errors:errors,
-            email: req.body.email,
-            password: req.body.password
-        });
-    }
-    else{
-        res.send('passed');
-    }
-});
-
 app.post('/sign-in-submit', (req, res) => {
     // dbConnection.then(function(db){
     //     delete req.body._id;
@@ -170,7 +145,7 @@ app.post('/sign-in-submit', (req, res) => {
     }
 
     if(errors.length > 0){
-        res.render('/', {
+        res.render('login', {
             errors:errors,
             email: req.body.email,
             password: req.body.password
