@@ -14,6 +14,7 @@ var dbConnection = mongoose.connect('mongodb+srv://dravicha:cs252@boiler-wallet-
 .then(()=> console.log('Mongo connected'))
 .catch(err => console.log(err));
 
+var currentUserCodes, currentUserName;
 
 require('./models/User');
 require('./models/Club');
@@ -45,15 +46,12 @@ app.get('/', (req,res) => {
 });
 
 app.get('/about', (req,res) => {
-    getClubs();
     res.render('ABOUT');
 });
 
 app.get('/contact', (req,res) => {
     res.render('CONTACT');
 });
-
-
 
 app.get('/clubs', (req,res) => {
     var clubList;
@@ -67,6 +65,23 @@ app.get('/clubs', (req,res) => {
         }
     });   
 });
+
+app.get('/myclubs', (req,res) => {
+    var clubList = [];
+
+    Club.find({}, function (err, myClubs){
+        if(myClubs!=null){
+            clubList = getmyClubs(myClubs,currentUserCodes);
+        }
+        res.render('clubs',{
+           clubList:clubList 
+        });
+        console.log(clubList);
+    });
+
+            
+});
+
 
 app.post('/sign-in-submit', (req, res) => {
 
@@ -92,6 +107,8 @@ app.post('/sign-in-submit', (req, res) => {
         User.findOne({email: req.body.email}, function (err, myUser) {
             if (myUser != null){
                 if(pass === myUser.password){
+                    currentUserCodes = myUser.codes;
+                    currentUserName = myUser.name;
                     res.redirect('clubs');
                 }
                 else{
@@ -133,5 +150,19 @@ function getClubs(myClubs){
     for(var i = 0; i < length ; i++){
        clubList.push(myClubs[i].title);
     }
+   return clubList;
+}
+
+function getmyClubs(clubs, codes){
+    let clubList = []; 
+    const ilen = codes.length;
+    const jlen = clubs.length;
+   for(var i = 0; i < ilen; i++){
+       for(var j = 0; j < jlen ; j++){
+            if(codes[i] === clubs[j].code){
+                clubList.push(clubs[j].title);
+            }
+       }
+   }
    return clubList;
 }
