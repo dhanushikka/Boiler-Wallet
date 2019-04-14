@@ -108,11 +108,6 @@ app.use(bodyParser.json())
 // };
 // collection.insertOne(ins);
 
-
-
-
-
-
 app.use(function(req,res,next){
     console.log(Date.now());
     next();
@@ -136,17 +131,55 @@ app.get('/contact', (req,res) => {
 app.post('/login', (req,res) =>{
     console.log(req.body);
     res.send('ok');
+
+    let errors = [];
+
+    if(!req.body.email){
+        errors.push({text: 'Missing email address'});
+    }
+    if(!req.body.password){
+        errors.push({text: 'Missing password'});
+    }
+
+    if(errors.length > 0){
+        res.render('/', {
+            errors:errors,
+            email: req.body.email,
+            password: req.body.password
+        });
+    }
+    else{
+        res.send('passed');
+    }
 });
 
 app.post('/sign-in-submit', (req, res) => {
-    dbConnection.then(function(db){
-        delete req.body._id;
-        db.collection('Users').insertOne(req.body);
-        //var value = db.collection('Users').count();
-        //console.log(value);
-    });
-    console.log(req.body);
-    res.send('User data received now: \n' + JSON.stringify(req.body.inputEmail));
+    // dbConnection.then(function(db){
+    //     delete req.body._id;
+    //     db.collection('Users').insertOne(req.body);
+    //     //var value = db.collection('Users').count();
+    //     //console.log(value);
+    // });
+    let errors = [];
+
+    if(!req.body.email){
+        errors.push({text: 'Missing email address'});
+    }
+    if(!req.body.password){
+        errors.push({text: 'Missing password'});
+    }
+
+    if(errors.length > 0){
+        res.render('/', {
+            errors:errors,
+            email: req.body.email,
+            password: req.body.password
+        });
+    }
+    else{
+        console.log(req.body);
+        res.send('User data received now: \n' + JSON.stringify(req.body.inputEmail));
+    }
 });
 
 const port = 5061;
