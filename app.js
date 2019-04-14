@@ -33,6 +33,8 @@ app.use(function(req,res,next){
     next();
 });
 
+app.use(express.static("."));
+
 app.get('/', (req,res) => {
     const title = 'Passing a variable into the view';
     res.render('login', {
