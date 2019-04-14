@@ -18,15 +18,19 @@
 
       <div class="jumbotron">
         <h1 class="display-3">Boiler Wallet</h1>
-        <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+        <p class="lead">Login to access your club wallet</p>
+        {{#each errors}}
+            <div class = "alert alert-danger">{{text}}</div>
+        {{else}}
 
+        {{/each}}
         <div class="sign-in">
             <form class="form-signin" method = "POST" action="/sign-in-submit">
                 <h2 class="form-signin-heading">Please sign in</h2>
                 <label for="inputEmail" class="sr-only">Email address</label>
-                <input type="email" id="inputEmail" class="form-control" name="email" placeholder="Email address" required autofocus>
+                <input type="email" id="inputEmail" class="form-control" name="email" placeholder="Email address" >
                 <label for="inputPassword" class="sr-only">Password</label>
-                <input type="password" id="inputPassword" class="form-control" name="password" placeholder="Password" required>
+                <input type="password" id="inputPassword" class="form-control" name="password" placeholder="Password" >
                 <div class="checkbox">
                 <label>
                     <input type="checkbox" value="remember-me"> Remember me
