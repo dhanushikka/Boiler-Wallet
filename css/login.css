@@ -11,7 +11,7 @@ a:hover {
 
 div.navbar, #navbar {
   overflow: hidden;
-  background-color: #333;
+  background: none;
   position: fixed;
   width: 100%;
   top: 0;
