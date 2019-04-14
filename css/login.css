@@ -32,7 +32,7 @@ body {
   }
   
   /* Customize container */
-  @media (min-width: 48em) {
+  @media (min-width: 35em) {
     .container {
       max-width: 46rem;
     }
@@ -51,16 +51,8 @@ body {
     font-size: 1.5rem;
   }
   
-  /* Supporting marketing content */
-  .marketing {
-    margin: 3rem 0;
-  }
-  .marketing p + h4 {
-    margin-top: 1.5rem;
-  }
-  
   /* Responsive: Portrait tablets and up */
-  @media screen and (min-width: 48em) {
+  @media screen and (min-width: 35em) {
     /* Remove the padding we set earlier */
     .header,
     .marketing,
@@ -77,3 +69,43 @@ body {
       border-bottom: 0;
     }
   }
+
+.sigin-in {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #eee;
+}
+
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+.form-signin .checkbox {
+  font-weight: normal;
+}
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
