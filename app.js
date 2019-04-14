@@ -14,11 +14,12 @@ var dbConnection = mongoose.connect('mongodb+srv://dravicha:cs252@boiler-wallet-
 .then(()=> console.log('Mongo connected'))
 .catch(err => console.log(err));
 
-
 require('./models/User');
 require('./models/Club');
+require('./models/Expenses');
 const User = mongoose.model('Users');
 const Club = mongoose.model('Clubs');
+const Expenses = mongoose.model('Expenses');
 
 // telling the system we want to use handlebars template engine
 app.engine('handlebars', exphbs({
@@ -66,6 +67,20 @@ app.get('/clubs', (req,res) => {
             });
         }
     });   
+});
+
+app.get('/expenses', (req, res) => {
+    console.log(req.body);
+    //var clubSelected = req.body.title; //title of club clicked
+    //var clubCode = req.body.code;
+    var userName = "sam";
+
+    //console.log(clubSelected);
+    //console.log(code);
+
+    var queryRes = Expenses.find({user: userName});
+    console.log(queryRes);
+
 });
 
 app.post('/sign-in-submit', (req, res) => {
@@ -134,4 +149,12 @@ function getClubs(myClubs){
        clubList.push(myClubs[i].title);
     }
    return clubList;
+}
+
+/* 
+    function to get the list of expesnes by specific user
+*/
+
+function getExpenses(code, club, user) {
+
 }
