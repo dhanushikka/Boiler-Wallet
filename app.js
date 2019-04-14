@@ -48,6 +48,10 @@ app.get('/contact', (req,res) => {
     res.render('CONTACT');
 });
 
+app.get('/clubs', (req,res) => {
+    res.render('clubs');
+});
+
 app.post('/sign-in-submit', (req, res) => {
 
     let errors = [];
