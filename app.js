@@ -14,6 +14,8 @@ var dbConnection = mongoose.connect('mongodb+srv://dravicha:cs252@boiler-wallet-
 .then(()=> console.log('Mongo connected'))
 .catch(err => console.log(err));
 
+var currentUserCodes, currentUserName;
+
 require('./models/User');
 require('./models/Club');
 require('./models/Expenses');
@@ -73,13 +75,13 @@ app.get('/expenses', (req, res) => {
     console.log(req.body);
     //var clubSelected = req.body.title; //title of club clicked
     //var clubCode = req.body.code;
-    var userName = "sam";
+    //var userName;
 
     //console.log(clubSelected);
     //console.log(code);
 
-    var queryRes = Expenses.find({user: userName});
-    console.log(queryRes);
+    //var queryRes = Expenses.find({user: userName});
+    //console.log(queryRes);
 
 });
 
@@ -107,6 +109,8 @@ app.post('/sign-in-submit', (req, res) => {
         User.findOne({email: req.body.email}, function (err, myUser) {
             if (myUser != null){
                 if(pass === myUser.password){
+                    currentUserCodes = myUser.codes;
+                    currentUserName = myUser.name;
                     res.redirect('clubs');
                 }
                 else{
