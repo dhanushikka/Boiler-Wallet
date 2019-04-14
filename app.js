@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
 
-mongoose.connect('mongodb+srv://dravicha:cs252@boiler-wallet-3r0z7.mongodb.net/test?retryWrites=true', {
+var dbConnection = mongoose.connect('mongodb+srv://dravicha:cs252@boiler-wallet-3r0z7.mongodb.net/test?retryWrites=true', {
     useNewUrlParser: true
 })
 .then(()=> console.log('Mongo connected'))
@@ -136,6 +136,17 @@ app.get('/contact', (req,res) => {
 app.post('/login', (req,res) =>{
     console.log(req.body);
     res.send('ok');
+});
+
+app.post('/sign-in-submit', (req, res) => {
+    dbConnection.then(function(db){
+        delete req.body._id;
+        db.collection('Users').insertOne(req.body);
+        //var value = db.collection('Users').count();
+        //console.log(value);
+    });
+    console.log(req.body);
+    res.send('User data received now: \n' + JSON.stringify(req.body.inputEmail));
 });
 
 const port = 5061;
