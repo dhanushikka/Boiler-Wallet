@@ -5,6 +5,10 @@
       <!-- Page Heading -->
       <h1 class="my-4">Clubs</h1>
 
+      <form class="myClubs" method = "POST" action="/myclubs">
+        <input type = "submit" value = "View My Clubs">
+      </form>
+
       <!-- Project One -->
       {{#each clubList}}
       <div class="row">
@@ -15,7 +19,7 @@
         </div>
         <div class="col-md-5">
           <h3>{{this}}</h3>
-          <a class="btn btn-primary" href="/expense/{{this}}">View Expenses</a>
+          <a class="btn btn-primary" href="/expenseCheck">View Expenses</a>
         </div>
       </div>
      
