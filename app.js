@@ -68,7 +68,7 @@ app.get('/clubs', (req,res) => {
     });   
 });
 
-app.get('/myclubs', (req,res) => {
+app.post('/myclubs', (req,res) => {
     var clubList = [];
 
     Club.find({}, function (err, myClubs){
@@ -187,5 +187,4 @@ function getmyClubs(clubs, codes){
 
 function getExpenses(code, club, user) {
     let clubExpenses = [];
-    const
 }
