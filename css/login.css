@@ -29,15 +29,6 @@ div.navbar, #navbar {
   text-decoration: none;
 }
 
-/* Custom default button */
-.btn-secondary,
-.btn-secondary:hover,
-.btn-secondary:focus {
-  color: #333;
-  text-shadow: none; /* Prevent inheritance from `body` */
-  background-color: #fff;
-}
-
 /*
  * Base structure
  */
@@ -104,4 +95,12 @@ body {
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+
+.form-signin input[type="submit"] {
+  padding: 10px;
+  width: 100px;
+  margin: 0;
+  background: white;
+  color: black;
 }
