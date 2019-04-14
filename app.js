@@ -53,8 +53,6 @@ app.get('/contact', (req,res) => {
     res.render('CONTACT');
 });
 
-
-
 app.get('/clubs', (req,res) => {
     var clubList;
     Club.find({}, function (err, myClubs){
