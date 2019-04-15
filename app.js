@@ -15,7 +15,7 @@ var dbConnection = mongoose.connect('mongodb+srv://dravicha:cs252@boiler-wallet-
 .then(()=> console.log('Mongo connected'))
 .catch(err => console.log(err));
 
-var currentUserCodes, currentUserName;
+var currentUserCodes, currentUserName, globalClubList;
 
 require('./models/User');
 require('./models/Club');
@@ -62,9 +62,11 @@ app.get('/clubs', (req,res) => {
     Club.find({}, function (err, myClubs){
         if(myClubs!=null){
             clubList = getClubs(myClubs);
+            globalClubList = clubList;
             console.log(clubList);
             res.render('clubs', {
-                clubList:clubList
+                clubList:clubList,
+                checkNeeded: false
             });
         }
     });   
@@ -78,7 +80,8 @@ app.post('/myclubs', (req,res) => {
             clubList = getmyClubs(myClubs,currentUserCodes);
         }
         res.render('clubs',{
-           clubList:clubList 
+           clubList:clubList,
+           checkNeeded: false
         });
         console.log(clubList);
     });     
@@ -129,14 +132,16 @@ app.post('/expenseCheck', (req, res) => {
                         }));
                     }
                 }
+                console.log('rendering clubs');
+                res.render('clubs',{
+                    clubList:globalClubList,
+                    checkNeeded: true
+                 });
+                
             });
             
         });   
     }
-
-    //TODO: need to ask for reference code
-
-
 
 });
 
