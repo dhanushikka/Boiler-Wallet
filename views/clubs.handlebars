@@ -1,5 +1,4 @@
-
-   <!-- Page Content -->
+<!-- Page Content -->
     <div class="container">
 
       <!-- Page Heading -->
@@ -19,7 +18,9 @@
         </div>
         <div class="col-md-5">
           <h3>{{this}}</h3>
-          <a class="btn btn-primary" href="/expenseCheck">View Expenses</a>
+          <form action="/expenseCheck" method="post">
+            <button class="btn btn-primary" name="name" value="{{this}}">View Expenses</button>
+          </form>
         </div>
       </div>
      

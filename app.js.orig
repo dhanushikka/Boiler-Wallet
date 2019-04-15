@@ -18,10 +18,8 @@ var currentUserCodes, currentUserName;
 
 require('./models/User');
 require('./models/Club');
-require('./models/Expenses');
 const User = mongoose.model('Users');
 const Club = mongoose.model('Clubs');
-const Expenses = mongoose.model('Expenses');
 
 // telling the system we want to use handlebars template engine
 app.engine('handlebars', exphbs({
@@ -68,7 +66,7 @@ app.get('/clubs', (req,res) => {
     });   
 });
 
-app.post('/myclubs', (req,res) => {
+app.get('/myclubs', (req,res) => {
     var clubList = [];
 
     Club.find({}, function (err, myClubs){
@@ -82,24 +80,7 @@ app.post('/myclubs', (req,res) => {
     });     
 });
 
-app.get('/expenses', (req, res) => {
-    //var clubSelected = req.body.title; //title of club clicked
-    //var clubCode = req.body.code;
 
-
-    console.log(currentUserName);
-    //console.log(code);
-
-    var queryRes = Expenses.find({user: currentUserName}, function(err, myExpenses) {
-        
-    });
-    console.log(queryRes);
-
-});
-
-app.post('/expenseCheck', (req, res) => {
-    console.log(req.body);
-});
 
 app.post('/sign-in-submit', (req, res) => {
 
@@ -171,6 +152,9 @@ function getClubs(myClubs){
    return clubList;
 }
 
+/* 
+    function to get the list of clubs just for the current user
+*/
 function getmyClubs(clubs, codes){
     let clubList = []; 
     const ilen = codes.length;
@@ -183,12 +167,4 @@ function getmyClubs(clubs, codes){
        }
    }
    return clubList;
-}
-
-/* 
-    function to get the list of expesnes by specific user
-*/
-
-function getExpenses(code, club, user) {
-    let clubExpenses = [];
 }
