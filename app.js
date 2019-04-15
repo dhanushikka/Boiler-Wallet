@@ -1,6 +1,7 @@
 const express = require('express')
 const exphbs  = require('express-handlebars');
 var bodyParser = require('body-parser');
+const url = require('url');
 
 const app = express();
 
@@ -22,6 +23,7 @@ require('./models/Expenses');
 const User = mongoose.model('Users');
 const Club = mongoose.model('Clubs');
 const Expenses = mongoose.model('Expenses');
+var checked = false;
 
 // telling the system we want to use handlebars template engine
 app.engine('handlebars', exphbs({
@@ -70,7 +72,7 @@ app.get('/clubs', (req,res) => {
 
 app.post('/myclubs', (req,res) => {
     var clubList = [];
-
+    checked = true;
     Club.find({}, function (err, myClubs){
         if(myClubs!=null){
             clubList = getmyClubs(myClubs,currentUserCodes);
@@ -86,19 +88,56 @@ app.get('/expenses', (req, res) => {
     //var clubSelected = req.body.title; //title of club clicked
     //var clubCode = req.body.code;
 
-
-    console.log(currentUserName);
+    console.log(req.body);
+    //console.log(currentUserName);
     //console.log(code);
 
     var queryRes = Expenses.find({user: currentUserName}, function(err, myExpenses) {
         
     });
-    console.log(queryRes);
+    //console.log(queryRes);
 
 });
 
 app.post('/expenseCheck', (req, res) => {
-    console.log(req.body);
+    if(checked == true){
+        Club.findOne({title: req.body.name}, function(err, myClub){
+            console.log(myClub.code);
+            res.redirect(url.format({
+                pathname:"/expenses",
+                query: {
+                   code: myClub.code
+                }
+            }));
+        });  
+    }
+    else{
+        Club.findOne({title: req.body.name}, function(err, myClub){
+            console.log(myClub);
+            User.findOne({name: currentUserName}, function(err, myUser){
+                console.log(myUser);
+                for(var i = 0; i < myUser.codes.length ; i++){
+                    if(myClub.code === myUser.codes[i]){
+                        checked = true;
+                        console.log(myClub.code);
+                        console.log(myUser.codes[i]);
+                        res.redirect(url.format({
+                            pathname:"/expenses",
+                            query: {
+                               code: myClub.code
+                            }
+                        }));
+                    }
+                }
+            });
+            
+        });   
+    }
+
+    //TODO: need to ask for reference code
+
+
+
 });
 
 app.post('/sign-in-submit', (req, res) => {
