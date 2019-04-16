@@ -6,6 +6,7 @@ const url = require('url');
 const app = express();
 
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 mongoose.Promise = global.Promise;
 
@@ -19,11 +20,23 @@ var currentUserCodes, currentUserName, globalClubList;
 
 require('./models/User');
 require('./models/Club');
-require('./models/Expenses');
+require('./models/Expense');
 const User = mongoose.model('Users');
 const Club = mongoose.model('Clubs');
 const Expenses = mongoose.model('Expenses');
 var checked = false;
+
+// const newExpense = {
+//             code: 'WISP123',
+//             name: 'sam',
+//             transaction: 25,
+//             where: 'Donation'
+//         }
+//         new Expenses(newExpense)
+//             .save()
+//             .then(expense => {
+//                 console.log("success");
+//             })
 
 // telling the system we want to use handlebars template engine
 app.engine('handlebars', exphbs({
@@ -88,15 +101,18 @@ app.post('/myclubs', (req,res) => {
 });
 
 app.get('/expenses', (req, res) => {
-    //var clubSelected = req.body.title; //title of club clicked
-    //var clubCode = req.body.code;
+    var clubCode = req.query.code;
+    console.log(clubCode);
 
-    console.log(req.body);
-    //console.log(currentUserName);
-    //console.log(code);
-
-    var queryRes = Expenses.find({user: currentUserName}, function(err, myExpenses) {
-        
+    Expenses.find({code: clubCode}, function(err, myExpenses) {
+        console.log("myExpenses: ", myExpenses);
+        if(myExpenses != null) {
+            var clubExpenses = getExpenses(myExpenses, clubCode, currentUserName);
+            console.log("Array: " + clubExpenses);
+        }
+        res.render('expenses', {
+            clubExpenses: clubExpenses
+        });
     });
     //console.log(queryRes);
 
@@ -233,6 +249,19 @@ function getmyClubs(clubs, codes){
     function to get the list of expesnes by specific user
 */
 
-function getExpenses(code, club, user) {
+function getExpenses(myExpenses, code, user) {
     let clubExpenses = [];
+    const len = myExpenses.length;
+
+    for(var i = 0; i < len; i++) {
+        if(code === myExpenses[i].code && user === myExpenses[i].name) {
+            var obj = {
+                name: myExpenses[i].name,
+                transcation: myExpenses[i].transaction,
+                where: myExpenses[i].where
+            }
+            clubExpenses.push(obj);
+        }
+    }
+    return clubExpenses;
 }
