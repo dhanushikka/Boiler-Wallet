@@ -24,7 +24,7 @@ require('./models/Expense');
 const User = mongoose.model('Users');
 const Club = mongoose.model('Clubs');
 const Expenses = mongoose.model('Expenses');
-var checked = false;
+var checked = false, exp = false;
 
 // const newExpense = {
 //             code: 'WISP123',
@@ -72,6 +72,8 @@ app.get('/contact', (req,res) => {
 
 app.get('/clubs', (req,res) => {
     var clubList;
+    checked = false;
+    console.log("All clubs")
     Club.find({}, function (err, myClubs){
         if(myClubs!=null){
             clubList = getClubs(myClubs);
@@ -88,6 +90,7 @@ app.get('/clubs', (req,res) => {
 app.post('/myclubs', (req,res) => {
     var clubList = [];
     checked = true;
+    
     Club.find({}, function (err, myClubs){
         if(myClubs!=null){
             clubList = getmyClubs(myClubs,currentUserCodes);
@@ -96,11 +99,13 @@ app.post('/myclubs', (req,res) => {
            clubList:clubList,
            checkNeeded: false
         });
+        checked = false;
         console.log(clubList);
     });     
 });
 
 app.get('/expenses', (req, res) => {
+    console.log(req.body);
     var clubCode = req.query.code;
     console.log(clubCode);
 
@@ -118,16 +123,24 @@ app.get('/expenses', (req, res) => {
 
 });
 
+app.get('/check', (req,res) => {
+    res.render('check', {
+        
+    });
+});
+
 app.post('/expenseCheck', (req, res) => {
+    exp = false;
     if(checked == true){
+        console.log(req.body.name + " " +checked);
         Club.findOne({title: req.body.name}, function(err, myClub){
-            console.log(myClub.code);
             res.redirect(url.format({
                 pathname:"/expenses",
                 query: {
                    code: myClub.code
                 }
             }));
+            
         });  
     }
     else{
@@ -137,9 +150,9 @@ app.post('/expenseCheck', (req, res) => {
                 console.log(myUser);
                 for(var i = 0; i < myUser.codes.length ; i++){
                     if(myClub.code === myUser.codes[i]){
-                        checked = true;
-                        console.log(myClub.code);
-                        console.log(myUser.codes[i]);
+                        exp = true;
+                        console.log("g: " + myClub.code);
+                        console.log("u: " +myUser.codes[i]);
                         res.redirect(url.format({
                             pathname:"/expenses",
                             query: {
@@ -148,11 +161,16 @@ app.post('/expenseCheck', (req, res) => {
                         }));
                     }
                 }
-                console.log('rendering clubs');
-                res.render('clubs',{
-                    clubList:globalClubList,
-                    checkNeeded: true
-                 });
+                console.log(req.body);
+            
+                if(exp == false)
+                res.redirect(url.format({
+                    pathname:"/check",
+                        query: {
+                            clubList:globalClubList,
+                            checkNeeded: true
+                        }
+                }));
                 
             });
             
