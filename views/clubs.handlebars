@@ -1,23 +1,26 @@
 <!-- Page Content -->
     <div class="container">
+        <link rel="stylesheet" href="clubs.css">
 
       <!-- Page Heading -->
-      <h1 class="my-4">Clubs</h1>
+      <font face = "Courier"><h1 class="my-4">Clubs</h1></font>
 
       <form class="myClubs" method = "POST" action="/myclubs">
-        <input type = "submit" value = "View My Clubs">
+        <button class="btn btn-primary" name="myClubs">View My Clubs</button>
       </form>
+  </br>
+  </br>
 
       <!-- Project One -->
       {{#each clubList}}
       <div class="row">
-        <div class="col-md-7">
+        <div class="col-md-3">
           <a href="#">
-            <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x300" alt="">
+            <img class="img-fluid rounded " src="assets/{{this}}.png" style="width:70px;height:70px;" alt="">
           </a>
         </div>
-        <div class="col-md-5">
-          <h3>{{this}}</h3>
+        <div class="col-md-5"> 
+          <font face = "Courier"><h3>{{this}}</h3></font>
           <form action="/expenseCheck" method="post">
             <button class="btn btn-primary" name="name" value="{{this}}">View Expenses</button>
           </form>
@@ -27,8 +30,6 @@
       <!-- /.row -->
 
       <hr>
-
-
        {{/each}}
 
 
