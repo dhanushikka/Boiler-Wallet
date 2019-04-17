@@ -73,19 +73,22 @@
         <!-- Category -->
         <div class="single category">
           <h3 class="side-title">BALANCE: <span class="pull-right">${{budget}}</span></h3>
-          <ul class="list-unstyled">
-
+          
+          <font face = "Courier">
+          <table style="width:100%">
             {{#each clubExpenses}}
-              <li>
-              <font face = "Courier">{{this.name}}: {{this.where}}<span class="pull-right">${{this.transaction}}</span></font>
-
+            
+            <tr>
+              <td>{{this.name}}</td>
+              <td>{{this.where}}</td>
+              <td>{{this.transaction}}</td>
               <script type="text/javascript">
                         pushObj("{{this.name}}",{{this.transaction}},"{{this.where}}");
               </script> 
-
-              </li>
+            </tr>
             {{/each}}
-          </ul>
+          </table>
+          </font>
         </div>
       </div> 
 
