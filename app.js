@@ -18,6 +18,7 @@ var dbConnection = mongoose.connect('mongodb+srv://dravicha:cs252@boiler-wallet-
 
 var currentUserCodes, currentUserName, globalClubList, currentClubCode, sum = 0;
 
+
 require('./models/User');
 require('./models/Club');
 require('./models/Expense');
@@ -70,6 +71,7 @@ app.get('/contact', (req,res) => {
     res.render('CONTACT');
 });
 
+
 app.get('/clubs', (req,res) => {
     var clubList;
     checked = false;
@@ -87,6 +89,10 @@ app.get('/clubs', (req,res) => {
     });   
 });
 
+
+app.post('/download', (req,res) => {
+    exportToCsv();   
+}); 
 
 app.post('/myclubs', (req,res) => {
     var clubList = [];
@@ -311,3 +317,14 @@ function getExpenses(myExpenses, code, user) {
 
     return clubExpenses;
 }
+
+function exportToCsv() {
+    var myCsv = "Col1,Col2,Col3\nval1,val2,val3";
+    // console.log(clubExpenses);
+    // for(var i = 0; i < clubExpenses.length ; i++){
+        
+    // }
+    console.log(global);
+    //global.window.open('data:text/csv;charset=utf-8,' + escape(myCsv));
+}
+
