@@ -16,7 +16,7 @@ var dbConnection = mongoose.connect('mongodb+srv://dravicha:cs252@boiler-wallet-
 .then(()=> console.log('Mongo connected'))
 .catch(err => console.log(err));
 
-var currentUserCodes, currentUserName, globalClubList;
+var currentUserCodes, currentUserName, globalClubList, currentClubCode, sum = 0;
 
 require('./models/User');
 require('./models/Club');
@@ -87,6 +87,7 @@ app.get('/clubs', (req,res) => {
     });   
 });
 
+
 app.post('/myclubs', (req,res) => {
     var clubList = [];
     checked = true;
@@ -105,21 +106,23 @@ app.post('/myclubs', (req,res) => {
 });
 
 app.get('/expenses', (req, res) => {
-    console.log(req.body);
+   
     var clubCode = req.query.code;
+    currentClubCode = clubCode;
     console.log(clubCode);
 
     Expenses.find({code: clubCode}, function(err, myExpenses) {
-        console.log("myExpenses: ", myExpenses);
+
         if(myExpenses != null) {
             var clubExpenses = getExpenses(myExpenses, clubCode, currentUserName);
             console.log("Array: " + clubExpenses);
         }
         res.render('expenses', {
-            clubExpenses: clubExpenses
+            clubExpenses: clubExpenses,
+            budget: sum,
+            user: currentUserName
         });
     });
-    //console.log(queryRes);
 
 });
 
@@ -127,6 +130,27 @@ app.get('/check', (req,res) => {
     res.render('check', {
         
     });
+});
+
+app.post('/transaction', (req, res) => {
+    const newExpense = {
+            code: currentClubCode,
+            name: req.body.name,
+            transaction: req.body.amount,
+            where: req.body.where
+    }
+    new Expenses(newExpense)
+            .save()
+            .then(expense => {
+                console.log("success");
+    })
+
+    res.redirect(url.format({
+        pathname:"/expenses",
+        query: {
+           code: currentClubCode
+        }
+    }));
 });
 
 app.post('/expenseCheck', (req, res) => {
@@ -268,18 +292,22 @@ function getmyClubs(clubs, codes){
 */
 
 function getExpenses(myExpenses, code, user) {
+    
     let clubExpenses = [];
     const len = myExpenses.length;
-
+    sum = 0;
     for(var i = 0; i < len; i++) {
-        if(code === myExpenses[i].code && user === myExpenses[i].name) {
+        if(code === myExpenses[i].code) {
+            sum = sum + myExpenses[i].transaction;
             var obj = {
                 name: myExpenses[i].name,
-                transcation: myExpenses[i].transaction,
+                transaction: myExpenses[i].transaction,
                 where: myExpenses[i].where
             }
+
             clubExpenses.push(obj);
         }
     }
+
     return clubExpenses;
 }
