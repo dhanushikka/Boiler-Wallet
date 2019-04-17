@@ -118,17 +118,17 @@ app.get('/expenses', (req, res) => {
             console.log("Array: " + clubExpenses);
         }
 
-        Club.find({code: clubCode}, function(err, currClub) {
-            if(currClub != null) {
-                var clubBudget = currClub[0].budget + sum;
-            }
+        // Club.find({code: clubCode}, function(err, currClub) {
+        //     if(currClub != null) {
+        //         var clubBudget = currClub[0].budget + sum;
+        //     }
 
             res.render('expenses', {
                 clubExpenses: clubExpenses,
-                budget: clubBudget,
+                budget: sum, //clubBudget,
                 user: currentUserName
             });
-        });
+        // });
     });
 
 });
