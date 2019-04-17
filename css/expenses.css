@@ -4,6 +4,15 @@
     padding-top: 20px;
 }
 
+.expenses {
+  color: black;
+  text-align: left;
+}
+
+.expHead {
+  color: white;
+}
+
 div.navbar1 {
     overflow: hidden;
     background: none;
@@ -19,3 +28,96 @@ div.navbar1 {
   .container, form {
     padding-top: 50px; 
 }
+
+.single {
+  padding: 30px 15px;
+  margin-top: 40px;
+  background: #fcfcfc;
+  border: 1px solid #f0f0f0; }
+  .single h3.side-title {
+  margin: 0;
+  margin-bottom: 10px;
+  padding: 0;
+  font-size: 20px;
+  color: #333;
+  text-transform: uppercase; }
+  .single h3.side-title:after {
+  content: '';
+  width: 60px;
+  height: 1px;
+  background:rgb(57, 85, 114);
+  display: block;
+  margin-top: 6px; }
+  
+  .single ul {
+  margin-bottom: 0; }
+  .single li a {
+  color: #666;
+  font-size: 14px;
+  text-transform: uppercase;
+  border-bottom: 1px solid #f0f0f0;
+  line-height: 40px;
+  display: block;
+  text-decoration: none; }
+  .single li a:hover {
+  color: #ff173c; }
+  .single li:last-child a {
+  border-bottom: 0; }
+
+  .sigin-in {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #eee;
+  }
+  
+  .form-signin {
+    float: right;
+    color: white;
+    max-width: 600px;
+    padding: 15px;
+    margin: 0 auto;
+  }
+  .form-signin .form-signin-heading,
+  .form-signin .checkbox {
+    margin-bottom: 10px;
+  }
+  .form-signin .checkbox {
+    font-weight: normal;
+  }
+  .form-signin .form-control {
+    position: relative;
+    height: auto;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    padding: 10px;
+    font-size: 16px;
+  }
+  .form-signin .form-control:focus {
+    z-index: 2;
+  }
+  .form-signin input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  .form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+  
+  .form-signin input[type="submit"] {
+    padding: 10px;
+    width: 100px;
+    margin: 0;
+    background: white;
+    color: black;
+  }
+  
+  .login {
+    color: white;
+  }
+
+  .csvbtn {
+    padding-top: 48px; 
+  }
