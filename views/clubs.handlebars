@@ -1,72 +1,49 @@
-<div class="navbar1">
-  <div id="navbar1">
-    <a class="signout" href="/">Sign Out</a>
-  </div>
-</div>
+<div class="navbar1 navbar-inverse-fixed bg-inverse">
+      <div class="container2 d-flex justify-content-between">
+        <a class="signout" href="/">Sign Out</a>
+      </div>
+    </div>
 
 <!-- Page Content -->
-    <div class="container">
-        <link rel="stylesheet" href="clubs.css">
+  <div class="clubs container">
 
-      <!-- Page Heading -->
-      <font face = "Courier"><h1 class="my-4">Clubs</h1></font>
+    <div class="row">
 
-      <form class="myClubs" method = "POST" action="/myclubs">
-        <button class="btn btn-primary" name="myClubs">View My Clubs</button>
-      </form>
+      <div class="col-lg-3">
 
-      <form class="myClubs" method = "GET" action="/clubs">
-        <button class="btn btn-primary" name="myClubs">View All Clubs</button>
-      </form>
-  </br>
-  </br>
+        <h1 class="my-4">Clubs</h1>
+        <div class="list-group">
+          <form class="myClubs" method = "POST" action="/myclubs">
+            <button class="btn" name="myClubs">View My Clubs</button>
+          </form>
 
-      <!-- Project One -->
-      {{#each clubList}}
-      <div class="row">
-        <div class="col-md-3">
-          <a href="#">
-            <img class="img-fluid rounded " src="assets/{{this}}.png" style="width:70px;height:70px;" alt="">
-          </a>
-        </div>
-        <div class="col-md-5"> 
-          <font face = "Courier"><h3>{{this}}</h3></font>
-          <form action="/expenseCheck" method="post">
-            <button class="btn btn-primary" name="name" value="{{this}}">View Expenses</button>
+          <form class="myClubs" method = "GET" action="/clubs">
+             <button class="btn" name="myClubs">View All Clubs</button>
           </form>
         </div>
+
       </div>
-     
-      <!-- /.row -->
 
-      <hr>
-       {{/each}}
+  <div class="col-lg-9">
+      <div class="row">
 
+      {{#each clubList}}
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card h-100">
+              <img class="card-img-top" src="/assets/{{this}}.png" alt="">
+              <div class="card-body">
+                <h4 class="card-title">
+                  {{this}}
+                </h4>
+                <form action="/expenseCheck" method="post">
+                  <button class="btn" name="name" value="{{this}}">View Expenses</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+  </div>
 
-      <!-- Pagination -->
-      <ul class="pagination justify-content-center">
-        <li class="page-item">
-          <a class="page-link" href="#" aria-label="Previous">
-            <span aria-hidden="true">&laquo;</span>
-            <span class="sr-only">Previous</span>
-          </a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="#">1</a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="#">2</a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="#">3</a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="#" aria-label="Next">
-            <span aria-hidden="true">&raquo;</span>
-            <span class="sr-only">Next</span>
-          </a>
-        </li>
-      </ul>
-
-    </div>
+</div>
     <!-- /.container -->
