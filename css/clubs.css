@@ -18,7 +18,7 @@ div.navbar1 {
       padding-top: 50px; 
   }
 
-  a {
+  .signout {
       float: right;
       padding-right: 30px;
       padding-top: 20px;
