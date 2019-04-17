@@ -1,15 +1,31 @@
 /*
  * Globals
  */
+@import url('https://fonts.googleapis.com/css?family=Vidaloka');
+@import url('https://fonts.googleapis.com/css?family=PT+Mono');
 
 /* Links */
 a,
-a:focus,
-a:hover {
+a:focus {
   color: #fff;
 }
 
+a:hover {
+  color: rgb(150, 210, 220);
+}
+
+h1 {
+  font-family: 'PT Mono', monospace;
+  font-size: 60px;
+}
+
+h4 {
+  font-family: 'PT Mono', monospace;
+}
+
 div.navbar, #navbar {
+  float: left;
+  font-family: 'PT Mono', monospace;
   overflow: hidden;
   background: none;
   position: fixed;
@@ -44,18 +60,27 @@ body {
   text-align: center;
 }
 
-/* Extra markup and styles for table-esque vertical and horizontal centering */
-.site-wrapper {
-  background-image: url(/assets/jimi-filipovski-189724-unsplash.jpg);
-  display: table;
-  padding-top: 50px;
-  width: 100%;
-  height: 100%; /* For at least Firefox */
-  min-height: 100%;
-  -webkit-box-shadow: inset 0 0 5rem rgba(0,0,0,.5);
-          box-shadow: inset 0 0 5rem rgba(0,0,0,.5);
-  align-content: bottom;
+#header {	
+	background-color: #444;
+	background: url(/assets/background-LEFTEDIT.jpg) no-repeat center top;
+	margin-top: -20px;
+	padding-top: 150px;
+	background-attachment: relative;
+	background-position: center center;
+	min-height: 650px;
+	width: 100%;
+	
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
+
 
 .sigin-in {
   padding-top: 40px;
