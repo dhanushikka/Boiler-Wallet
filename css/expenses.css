@@ -33,24 +33,31 @@ div.navbar1 {
   padding: 30px 15px;
   margin-top: 40px;
   background: #fcfcfc;
-  border: 1px solid #f0f0f0; }
+  border: 1px solid #f0f0f0; 
+}
+
   .single h3.side-title {
   margin: 0;
   margin-bottom: 10px;
   padding: 0;
   font-size: 20px;
   color: #333;
-  text-transform: uppercase; }
+  text-transform: uppercase;
+ }
+
   .single h3.side-title:after {
   content: '';
   width: 60px;
   height: 1px;
   background:rgb(57, 85, 114);
   display: block;
-  margin-top: 6px; }
-  
+  margin-top: 6px; 
+  }
+
   .single ul {
-  margin-bottom: 0; }
+  margin-bottom: 0;
+ }
+
   .single li a {
   color: #666;
   font-size: 14px;
@@ -58,11 +65,16 @@ div.navbar1 {
   border-bottom: 1px solid #f0f0f0;
   line-height: 40px;
   display: block;
-  text-decoration: none; }
+  text-decoration: none; 
+}
+
   .single li a:hover {
-  color: #ff173c; }
+  color: #ff173c; 
+}
+
   .single li:last-child a {
-  border-bottom: 0; }
+  border-bottom: 0; 
+}
 
   .sigin-in {
     padding-top: 40px;
