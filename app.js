@@ -123,11 +123,18 @@ app.get('/expenses', (req, res) => {
             var clubExpenses = getExpenses(myExpenses, clubCode, currentUserName);
             console.log("Array: " + clubExpenses);
         }
-        res.render('expenses', {
-            clubExpenses: clubExpenses,
-            budget: sum,
-            user: currentUserName
-        });
+
+        // Club.find({code: clubCode}, function(err, currClub) {
+        //     if(currClub != null) {
+        //         var clubBudget = currClub[0].budget + sum;
+        //     }
+
+            res.render('expenses', {
+                clubExpenses: clubExpenses,
+                budget: sum, //clubBudget,
+                user: currentUserName
+            });
+        // });
     });
 
 });
