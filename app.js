@@ -56,8 +56,12 @@ app.use(function(req,res,next){
     next();
 });
 
+// to use css files
 app.use(express.static("."));
 
+/*
+    function to display login page
+*/
 app.get('/', (req,res) => {
     const title = 'Passing a variable into the view';
     res.render('login', {
@@ -65,15 +69,26 @@ app.get('/', (req,res) => {
     }); 
 });
 
+
+/*
+    ABOUT page
+*/
 app.get('/about', (req,res) => {
     res.render('ABOUT');
 });
 
+
+/*
+    CONTACT page
+*/
 app.get('/contact', (req,res) => {
     res.render('CONTACT');
 });
 
 
+/*
+    ALL CLUBS
+*/
 app.get('/clubs', (req,res) => {
     var clubList;
     checked = false;
@@ -83,19 +98,55 @@ app.get('/clubs', (req,res) => {
             clubList = getClubs(myClubs);
             globalClubList = clubList;
             console.log(clubList);
-            res.render('clubs', {
-                clubList:clubList,
-                checkNeeded: false
-            });
+            if(currentUserName === "admin"){
+                res.render('clubs', {
+                    clubList:clubList,
+                    checkNeeded: false,
+                    admin: true
+                });
+            }
+            else{
+                res.render('clubs', {
+                    clubList:clubList,
+                    checkNeeded: false,
+                    admin: false
+                }); 
+            }
+            
         }
     });   
 });
 
 
+app.get('/addclub', (req,res) => {
+    res.render('addclub', {
+        
+    });  
+});
+
 app.post('/download', (req,res) => {
     exportToCsv();   
 }); 
 
+app.post('/createclub', (req,res) => {
+    console.log(req.body);
+    // const newClub = {
+    //             title: req.body.title,
+    //             code: req.body.code,
+    //             budget: req.body.budget
+    //     }
+    //     new Club(newClub)
+    //             .save()
+    //             .then(club => {
+    //                 console.log("success");
+    //     })
+    res.redirect('clubs');
+        
+}); 
+
+/*
+    USER SPECIFIC CLUBS
+*/
 app.post('/myclubs', (req,res) => {
     var clubList = [];
     checked = true;
@@ -104,15 +155,29 @@ app.post('/myclubs', (req,res) => {
         if(myClubs!=null){
             clubList = getmyClubs(myClubs,currentUserCodes);
         }
-        res.render('clubs',{
-           clubList:clubList,
-           checkNeeded: false
-        });
+        if(currentUserName === "admin"){
+            res.render('clubs',{
+            clubList:clubList,
+            checkNeeded: false,
+            admin: true
+            });
+        }
+        else{
+            res.render('clubs',{
+                clubList:clubList,
+                checkNeeded: false,
+                admin: false
+                }); 
+        }
         checked = false;
         console.log(clubList);
     });     
 });
 
+
+/*
+    EXPENSES PAGE
+*/
 app.get('/expenses', (req, res) => {
    
     var clubCode = req.query.code;
