@@ -59,7 +59,11 @@ h1 {
   letter-spacing: 3px;
 }
 
-
+.text-center {
+  font-family: 'Raleway',sans-serif;
+  padding-top: 20px;
+  color: black;
+}
 
 h4 {
   font-family: 'Raleway', sans-serif;
@@ -153,9 +157,8 @@ body {
   outline: none;
 }
 
-
 .form-signin input[type="submit"] {
-  width: 150px;
+  width: 300px;
   margin-top: 20px;
   height: 40px;
   border-radius: 1rem;
