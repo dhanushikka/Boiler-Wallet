@@ -2,6 +2,8 @@ const express = require('express')
 const exphbs  = require('express-handlebars');
 var bodyParser = require('body-parser');
 const url = require('url');
+const bcrypt = require('bcrypt');
+
 
 const app = express();
 
@@ -17,7 +19,7 @@ var dbConnection = mongoose.connect('mongodb+srv://dravicha:cs252@boiler-wallet-
 .catch(err => console.log(err));
 
 var currentUserCodes, currentUserName, globalClubList, currentClubCode, sum = 0;
-
+const saltRounds = 10;
 
 require('./models/User');
 require('./models/Club');
@@ -172,20 +174,28 @@ app.post('/transaction', (req, res) => {
 });
 
 app.post('/register', (req, res) => {
-    const newUser = {
-            name: req.body.name,
-            email: req.body.email,
-            password: req.body.password
-    }
-    new User(newUser)
-            .save()
-            .then(user => {
-                console.log("success");
-    })
 
-    res.render('login', {
-        reg:true
-    }); 
+    bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
+        // Store hash in your password DB.
+        const newUser = {
+                    name: req.body.name,
+                    email: req.body.email,
+                    password: hash
+            }
+            new User(newUser)
+                    .save()
+                    .then(user => {
+                        console.log("success");
+            })
+        
+            res.render('login', {
+                reg:true
+            });
+    });
+
+    
+
+     
 });
 
 app.post('/expenseCheck', (req, res) => {
@@ -264,22 +274,42 @@ app.post('/sign-in-submit', (req, res) => {
         const pass = req.body.password;
         User.findOne({email: req.body.email}, function (err, myUser) {
             if (myUser != null){
-                if(pass === myUser.password){
-                    currentUserCodes = myUser.codes;
-                    currentUserName = myUser.name;
-                    res.redirect('clubs');
-                }
-                else{
-                    errors.push({text: 'Wrong password!'});
+                bcrypt.compare(pass, myUser.password, function(err, result) {
+                    // res == true
+                    if(result == true){
+                        currentUserCodes = myUser.codes;
+                        currentUserName = myUser.name;
+                        res.redirect('clubs');
+                    }
+                    else{
+                        errors.push({text: 'Wrong password!'});
+                        
+                        res.render('login', {
+                            reg: false,
+                            errors:errors,
+                            email: req.body.email,
+                            password: req.body.password,
+                        });
                     
-                    res.render('login', {
-                        reg: false,
-                        errors:errors,
-                        email: req.body.email,
-                        password: req.body.password,
-                    });
+                    }
+                });
+                // if(pass === myUser.password){
+                //     currentUserCodes = myUser.codes;
+                //     currentUserName = myUser.name;
+                //     res.redirect('clubs');
+                // }
                 
-                }
+                // else{
+                //     errors.push({text: 'Wrong password!'});
+                    
+                //     res.render('login', {
+                //         reg: false,
+                //         errors:errors,
+                //         email: req.body.email,
+                //         password: req.body.password,
+                //     });
+                
+                // }
             } 
             else{
                 errors.push({text: 'Wrong login credentials!'});
@@ -352,13 +382,4 @@ function getExpenses(myExpenses, code, user) {
     return clubExpenses;
 }
 
-function exportToCsv() {
-    var myCsv = "Col1,Col2,Col3\nval1,val2,val3";
-    // console.log(clubExpenses);
-    // for(var i = 0; i < clubExpenses.length ; i++){
-        
-    // }
-    console.log(global);
-    //global.window.open('data:text/csv;charset=utf-8,' + escape(myCsv));
-}
 
