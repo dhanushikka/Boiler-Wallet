@@ -5,10 +5,9 @@
   <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
     <ul class="nav navbar-nav navbar-right">
-      <li><a class="navScroll" href="/"><i class="fas fa-home"></i></a></li>
+      <li><a class="navScroll" href="#header"><i class="fas fa-home"></i></a></li>
       <li><a class="navScroll" href="/sign-up"><i class="fas fa-user-plus"></i></a></li>
       <li><a class="navScroll" href="/about"><i class="far fa-question-circle"></i></a></li>
-      <li><a class="navScroll" href="/contact"><i class="fas fa-envelope"></i></a></li>
     </ul>
   </div>
 </nav>
@@ -41,6 +40,9 @@
                 <input type="password" id="inputPassword" class="form-control" name="password" placeholder="Password" >
                 <input type = "submit" value = "Submit">
             </form>
+
+
+          <div class="text-center">Don't have an account? <a href="/sign-up">Sign up here</a></div>
 
           {{#if reg}}
             <font color = "black">

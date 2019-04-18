@@ -6,8 +6,8 @@
   <div class="container-fluid">
     <ul class="nav navbar-nav navbar-right">
       <li><a class="navScroll" href="/"><i class="fas fa-home"></i></a></li>
+      <li><a class="navScroll" href="/#login"><i class="fas fa-sign-in-alt"></i></a></li>
       <li><a class="navScroll" href="/about"><i class="far fa-question-circle"></i></a></li>
-      <li><a class="navScroll" href="/contact"><i class="fas fa-envelope"></i></a></li>
     </ul>
   </div>
 </nav>
@@ -39,32 +39,13 @@
                 <input class="btn" type = "submit" value = "Submit">
         </div>
       </form>
-    <div class="text-center">Already have an account? <a href="#">Login here</a></div>
+    <div class="text-center">Already have an account? <a href="/#login">Login here</a></div>
   </div>
+      {{#each errors}}
+      <div class = "alert alert-danger">{{text}}</div>
+      {{else}}
 
-          {{!-- <div class="sign-in">
-            <form class="form-signin" method = "POST" action="/register">
-                <h4 class="form-signin-heading">We're so excited to have you on board!</h4>
-
-                <label for="inputEmail" class="sr-only">Name</label>
-                <input type="name" id="inputName" class="form-control" name="name" placeholder="Name" >
-                
-                <label for="inputEmail" class="sr-only">Email address</label>
-                <input type="email" id="inputEmail" class="form-control" name="email" placeholder="Email address" >
-                
-                <label for="inputPassword" class="sr-only">Password</label>
-                <input type="password" id="inputPassword" class="form-control" name="password" placeholder="Password" >
-                
-                <input type = "submit" value = "Submit">
-                <!-- <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button> -->
-            </form>
-         </div> <!-- /container --> --}}
-
-        {{#each errors}}
-        <div class = "alert alert-danger">{{text}}</div>
-        {{else}}
-
-        {{/each}}
+      {{/each}}
        </div>
      </div>
    </div>
