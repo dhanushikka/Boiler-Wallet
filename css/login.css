@@ -3,46 +3,62 @@
  */
 @import url('https://fonts.googleapis.com/css?family=Vidaloka');
 @import url('https://fonts.googleapis.com/css?family=PT+Mono');
+@import url('https://fonts.googleapis.com/css?family=Oswald|Playfair+Display:900|Roboto:900');
+@import url('https://fonts.googleapis.com/css?family=Montserrat+Subrayada:700');
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
 
 /* Links */
-a,
-a:focus {
-  color: #fff;
+ a {
+  text-decoration: none;
+}
+
+html {
+  font-family: 'Raleway', sans-serif;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.container-fluid {
+  padding-left: 30px;
+  padding-right: 40px;
+  font-family: 'Oswald', sans-serif;
+  background-color: none;
+}
+
+li {
+  font-size: 20px;
+  padding-left: 10px;
+}
+
+a.scroll-down {
+  color: white;
+  font-size: 40px;
+  transition: 0.3s;
+}
+
+a.scroll-down:hover, a.navScroll:hover {
+  color: rgb(90, 91, 94);
 }
 
 a:hover {
-  color: rgb(150, 210, 220);
+  color:  rgb(57, 85, 114);
 }
+
 
 h1 {
-  font-family: 'PT Mono', monospace;
+  margin-top: 100px;
+  font-family: 'Raleway', sans-serif;
   font-size: 60px;
+  letter-spacing: 3px;
 }
+
+
 
 h4 {
-  font-family: 'PT Mono', monospace;
-}
-
-div.navbar, #navbar {
-  float: left;
-  font-family: 'PT Mono', monospace;
-  overflow: hidden;
-  background: none;
-  position: fixed;
-  width: 100%;
-  top: 0;
-  margin: 0px;
-  opacity: 50%;
-}
-
-/* Navbar links */
-#navbar a {
-  float: left;
-  display: block;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px;
-  text-decoration: none;
+  font-family: 'Raleway', sans-serif;
 }
 
 /*
@@ -60,27 +76,36 @@ body {
   text-align: center;
 }
 
-#header {	
-	background-color: #444;
-	background: url(/assets/background-LEFTEDIT.jpg) no-repeat center top;
-	margin-top: -20px;
+.navbar-fixed-top {
+  background: none;
+  border: none;
+}
+
+#header {
+	background-color: black;
+  background: url(/assets/background-LEFTEDIT.jpg) center no-repeat;
+
 	padding-top: 150px;
 	background-attachment: relative;
 	background-position: center center;
 	min-height: 650px;
 	width: 100%;
 	
-    -webkit-background-size: 100%;
-    -moz-background-size: 100%;
-    -o-background-size: 100%;
-    background-size: 100%;
+  -webkit-background-size: 100%;
+  -moz-background-size: 100%;
+  -o-background-size: 100%;
+  background-size: 100%;
 
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
+.takeSpace {
+  height: 300px;
+  background-color: black;
+}
 
 .sigin-in {
   padding-top: 40px;
@@ -89,12 +114,15 @@ body {
 }
 
 .form-signin {
+  color: black;
+  font-family: 'Raleway', sans-serif;
   max-width: 300px;
-  padding: 15px;
+  padding: 0px;
   margin: 0 auto;
 }
 .form-signin .form-signin-heading,
 .form-signin .checkbox {
+  padding: 20px;
   margin-bottom: 10px;
 }
 .form-signin .checkbox {
@@ -112,24 +140,43 @@ body {
   z-index: 2;
 }
 .form-signin input[type="email"] {
-  margin-bottom: -1px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
+  margin-bottom: 20px;
 }
 .form-signin input[type="password"] {
   margin-bottom: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
 }
 
 .form-signin input[type="submit"] {
-  padding: 10px;
-  width: 100px;
-  margin: 0;
-  background: white;
+  width: 150px;
+  margin-top: 20px;
+  height: 40px;
+  border-radius: 1rem;
+  padding: 1.5%;
+  border: none;
+  font-weight: 600;
+  color: #fff;
+  background-color: rgb(57, 85, 114);
+}
+
+.login-heading {
+  font-family: 'Raleway', sans-serif;
   color: black;
 }
 
+.imgSide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  object-fit: cover;
+  width: 550px;
+}
+
+.imgSide img {
+  flex-shrink: 0;
+  height: 650px;
+}
+
 .login {
-  color: white;
+  top: 100px;
 }
