@@ -59,7 +59,7 @@ app.use(express.static("."));
 app.get('/', (req,res) => {
     const title = 'Passing a variable into the view';
     res.render('login', {
-        title:title
+        reg:false
     }); 
 });
 
@@ -145,6 +145,11 @@ app.get('/check', (req,res) => {
     });
 });
 
+app.get('/sign-up', (req,res) => {
+    res.render('register', {
+    });
+});
+
 app.post('/transaction', (req, res) => {
     const newExpense = {
             code: currentClubCode,
@@ -164,6 +169,23 @@ app.post('/transaction', (req, res) => {
            code: currentClubCode
         }
     }));
+});
+
+app.post('/register', (req, res) => {
+    const newUser = {
+            name: req.body.name,
+            email: req.body.email,
+            password: req.body.password
+    }
+    new User(newUser)
+            .save()
+            .then(user => {
+                console.log("success");
+    })
+
+    res.render('login', {
+        reg:true
+    }); 
 });
 
 app.post('/expenseCheck', (req, res) => {
@@ -216,6 +238,8 @@ app.post('/expenseCheck', (req, res) => {
 
 });
 
+
+
 app.post('/sign-in-submit', (req, res) => {
 
     let errors = [];
@@ -229,6 +253,7 @@ app.post('/sign-in-submit', (req, res) => {
 
     if(errors.length > 0){
         res.render('login', {
+            reg : false,
             errors:errors,
             email: req.body.email,
             password: req.body.password,
@@ -248,6 +273,7 @@ app.post('/sign-in-submit', (req, res) => {
                     errors.push({text: 'Wrong password!'});
                     
                     res.render('login', {
+                        reg: false,
                         errors:errors,
                         email: req.body.email,
                         password: req.body.password,
@@ -258,6 +284,7 @@ app.post('/sign-in-submit', (req, res) => {
             else{
                 errors.push({text: 'Wrong login credentials!'});
                 res.render('login', {
+                    reg: false,
                     errors:errors,
                     email: req.body.email,
                     password: req.body.password,

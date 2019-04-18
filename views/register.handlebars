@@ -1,6 +1,6 @@
 <div class="navbar">
   <div id="navbar">
-    <a href="/sign-up">Sign up!</a>
+    <a href="/">Login</a>
     <a href="/about">About</a>
     <a href="/contact">Contact</a>
   </div>
@@ -12,19 +12,20 @@
         <div class="col-lg-6">
           <h1 class="login">Boiler Wallet</h1>
           <h4 class="subtitle">The easy way to budget</h4>
-          {{#if reg}}
-          <br>
-          <font color = "yellow">
-          <h4 class="subtitle">You are now registered!</h4>
-          </font>
-          {{/if}}
+
           <div class="sign-in">
-            <form class="form-signin" method = "POST" action="/sign-in-submit">
-                <h4 class="form-signin-heading">Please sign in</h4>
+            <form class="form-signin" method = "POST" action="/register">
+                <h4 class="form-signin-heading">We're so excited to have you on board!</h4>
+
+                <label for="inputEmail" class="sr-only">Name</label>
+                <input type="name" id="inputName" class="form-control" name="name" placeholder="Name" >
+                
                 <label for="inputEmail" class="sr-only">Email address</label>
                 <input type="email" id="inputEmail" class="form-control" name="email" placeholder="Email address" >
+                
                 <label for="inputPassword" class="sr-only">Password</label>
                 <input type="password" id="inputPassword" class="form-control" name="password" placeholder="Password" >
+                
                 <input type = "submit" value = "Submit">
                 <!-- <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button> -->
             </form>
