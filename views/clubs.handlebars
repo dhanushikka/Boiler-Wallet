@@ -1,49 +1,41 @@
-<div class="navbar1 navbar-inverse-fixed bg-inverse">
-      <div class="container2 d-flex justify-content-between">
-        <a class="signout" href="/">Sign Out</a>
-      </div>
-    </div>
 
-<!-- Page Content -->
-  <div class="clubs container">
+<link rel="stylesheet" href="/css/clubs.css" type="text/css">
 
-    <div class="row">
-
-      <div class="col-lg-3">
-
-        <h1 class="my-4">Clubs</h1>
-        <div class="list-group">
-          <form class="myClubs" method = "POST" action="/myclubs">
-            <button class="btn" name="myClubs">View My Clubs</button>
-          </form>
-
-          <form class="myClubs" method = "GET" action="/clubs">
-             <button class="btn" name="myClubs">View All Clubs</button>
-          </form>
-        </div>
-
-      </div>
-
-  <div class="col-lg-9">
-      <div class="row">
-
-      {{#each clubList}}
-        <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card h-100">
-              <img class="card-img-top" src="/assets/{{this}}.png" alt="">
-              <div class="card-body">
-                <h4 class="card-title">
-                  {{this}}
-                </h4>
-                <form action="/expenseCheck" method="post">
-                  <button class="btn" name="name" value="{{this}}">View Expenses</button>
-                </form>
-              </div>
-            </div>
-          </div>
-        {{/each}}
-      </div>
+<body>
+  <div class="sidenav">
+    <h1>Clubs</h1>
+    <form class="myClubs" method = "POST" action="/myclubs">
+              <button class="btn" name="myClubs"><i class="fas fa-club"></i> My Clubs</button>
+            </form>
+            <form class="myClubs" method = "GET" action="/clubs">
+              <button class="btn" name="myClubs"><i class="fas fa-club"></i> All Clubs</button>
+            </form>
+    <a class="navScroll" href="/"><i class="fal fa-sign-out"></i></a>
   </div>
 
-</div>
-    <!-- /.container -->
+  <!-- Page Content -->
+    <div class="container">
+      <div class="row">
+
+        <div class="col-lg-3 takeSpace"></div>
+
+        <div class="clubSection d-inline-block col-lg-9">
+          <div class="row">
+          {{#each clubList}}
+            <div class="clubCard col-sm-3">
+                    <form action="/expenseCheck" method="post">
+                      <button class="btn" name="name" value="{{this}}">
+                        <img class="card-img-top" src="/assets/{{this}}.png" alt="">
+                        <div class="middle">
+                          <div class="text">{{this}}</div>
+                        </div>
+                      </button>
+                    </form>
+              </div>
+            {{/each}}
+          </div>
+    </div>
+
+  </div>
+      <!-- /.container -->
+</body>
