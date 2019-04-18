@@ -30,16 +30,16 @@ const Expenses = mongoose.model('Expenses');
 var checked = false, exp = false;
 
 // const newExpense = {
-//             code: 'WISP123',
-//             name: 'sam',
-//             transaction: 25,
-//             where: 'Donation'
-//         }
-//         new Expenses(newExpense)
-//             .save()
-//             .then(expense => {
-//                 console.log("success");
-//             })
+//             code: 'WISP123',
+//             name: 'sam',
+//             transaction: 25,
+//             where: 'Donation'
+//         }
+//         new Expenses(newExpense)
+//             .save()
+//             .then(expense => {
+//                 console.log("success");
+//             })
 
 // telling the system we want to use handlebars template engine
 app.engine('handlebars', exphbs({
@@ -154,15 +154,15 @@ app.get('/sign-up', (req,res) => {
 
 app.post('/transaction', (req, res) => {
     const newExpense = {
-            code: currentClubCode,
-            name: req.body.name,
-            transaction: req.body.amount,
-            where: req.body.where
+            code: currentClubCode,
+            name: req.body.name,
+            transaction: req.body.amount,
+            where: req.body.where
     }
     new Expenses(newExpense)
-            .save()
-            .then(expense => {
-                console.log("success");
+            .save()
+            .then(expense => {
+                console.log("success");
     })
 
     res.redirect(url.format({
@@ -178,14 +178,14 @@ app.post('/register', (req, res) => {
     bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
         // Store hash in your password DB.
         const newUser = {
-                    name: req.body.name,
-                    email: req.body.email,
-                    password: hash
+                    name: req.body.name,
+                    email: req.body.email,
+                    password: hash
             }
             new User(newUser)
-                    .save()
-                    .then(user => {
-                        console.log("success");
+                    .save()
+                    .then(user => {
+                        console.log("success");
             })
         
             res.render('login', {
@@ -381,5 +381,3 @@ function getExpenses(myExpenses, code, user) {
 
     return clubExpenses;
 }
-
-

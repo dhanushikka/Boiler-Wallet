@@ -1,7 +1,19 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
+
+body {
+  font-family: 'Raleway';
+  color: black;
+}
+
 .signout {
     float: right;
     padding-right: 30px;
     padding-top: 20px;
+}
+
+.navbar-fixed-top {
+  background: none;
+  border: none;
 }
 
 .expenses {
@@ -9,9 +21,6 @@
   text-align: left;
 }
 
-.expHead {
-  color: white;
-}
 
 div.navbar1 {
     overflow: hidden;
