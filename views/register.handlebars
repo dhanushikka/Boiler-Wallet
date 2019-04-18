@@ -1,19 +1,48 @@
-<div class="navbar">
-  <div id="navbar">
-    <a href="/">Login</a>
-    <a href="/about">About</a>
-    <a href="/contact">Contact</a>
+
+<link rel="stylesheet" href="/css/register.css" type="text/css">
+
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <ul class="nav navbar-nav navbar-right">
+      <li><a class="navScroll" href="/"><i class="fas fa-home"></i></a></li>
+      <li><a class="navScroll" href="/about"><i class="far fa-question-circle"></i></a></li>
+      <li><a class="navScroll" href="/contact"><i class="fas fa-envelope"></i></a></li>
+    </ul>
   </div>
-</div>
+</nav>
 
-<div id="header">
-    <div class="container1">
-      <div class="row">
-        <div class="col-lg-6">
-          <h1 class="login">Boiler Wallet</h1>
-          <h4 class="subtitle">The easy way to budget</h4>
+<div class="signup-form">
+      <form class="form-signin" method = "POST" action="/register">
+      <h2>Sign Up</h2>
+      <p>Please fill in this form to create an account!</p>
+      <hr>
+          <div class="form-group">
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-user"></i></span>
+          <input type="name" id="inputName" class="form-control" name="name" placeholder="Name" >
+        </div>
+          </div>
+          <div class="form-group">
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-paper-plane"></i></span>
+          <input type="email" id="inputEmail" class="form-control" name="email" placeholder="Email address" >
+        </div>
+          </div>
+      <div class="form-group">
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+          <input type="password" id="inputPassword" class="form-control" name="password" placeholder="Password" >
+        </div>
+          </div>
+        <div class="form-group">
+                <input class="btn" type = "submit" value = "Submit">
+        </div>
+      </form>
+    <div class="text-center">Already have an account? <a href="#">Login here</a></div>
+  </div>
 
-          <div class="sign-in">
+          {{!-- <div class="sign-in">
             <form class="form-signin" method = "POST" action="/register">
                 <h4 class="form-signin-heading">We're so excited to have you on board!</h4>
 
@@ -29,7 +58,7 @@
                 <input type = "submit" value = "Submit">
                 <!-- <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button> -->
             </form>
-         </div> <!-- /container -->
+         </div> <!-- /container --> --}}
 
         {{#each errors}}
         <div class = "alert alert-danger">{{text}}</div>
@@ -50,3 +79,4 @@
     <script src="../../dist/js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+</body>
