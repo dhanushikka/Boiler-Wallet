@@ -4,12 +4,21 @@
 <body>
   <div class="sidenav">
     <h1>Clubs</h1>
+    {{#unless admin}}
     <form class="myClubs" method = "POST" action="/myclubs">
-              <button class="btn" name="myClubs"><i class="fas fa-club"></i> My Clubs</button>
-            </form>
-            <form class="myClubs" method = "GET" action="/clubs">
-              <button class="btn" name="myClubs"><i class="fas fa-club"></i> All Clubs</button>
-            </form>
+      <button class="btn" name="myClubs"><i class="fas fa-club"></i> My Clubs</button>
+    </form>
+    <form class="myClubs" method = "GET" action="/clubs">
+      <button class="btn" name="myClubs"><i class="fas fa-club"></i> All Clubs</button>
+    </form>
+    {{/unless}}
+    {{#if admin}}
+    <form class="myClubs" method = "GET" action="/addclub">
+      <button class="btn" name="myClubs"><i class="fas fa-club"></i> Add a club</button>
+    </form>
+    {{/if}}
+ 
+    
     <a class="navScroll" href="/"><i class="fal fa-sign-out"></i></a>
   </div>
 
