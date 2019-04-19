@@ -31,15 +31,15 @@
         <div class="clubSection d-inline-block col-lg-9">
           <div class="row">
           {{#each clubList}}
-            <div class="clubCard col-sm-3">
-                    <form action="/expenseCheck" method="post">
-                      <button class="btn" name="name" value="{{this}}">
-                        <img class="card-img-top" src="/assets/{{this}}.png" alt="">
-                        <div class="middle">
-                          <div class="text">{{this}}</div>
-                        </div>
-                      </button>
-                    </form>
+              <div class="clubCard col-sm-3">
+                <form action="/expenseCheck" method="post">
+                    <button class="btn" name="name" value="{{this}}">
+                    <img class="card-img-top" src="/assets/{{this}}.png" alt="">
+                    <div class="middle">
+                      <div class="text">{{this}}</div>
+                    </div>
+                  </button>
+                </form>
               </div>
             {{/each}}
           </div>
