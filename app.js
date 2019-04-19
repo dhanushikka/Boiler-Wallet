@@ -222,7 +222,8 @@ app.post('/transaction', (req, res) => {
             code: currentClubCode,
             name: req.body.name,
             transaction: req.body.amount,
-            where: req.body.where
+            where: req.body.where,
+            date: req.body.date
     }
     new Expenses(newExpense)
             .save()
@@ -437,7 +438,8 @@ function getExpenses(myExpenses, code, user) {
             var obj = {
                 name: myExpenses[i].name,
                 transaction: myExpenses[i].transaction,
-                where: myExpenses[i].where
+                where: myExpenses[i].where,
+                date: myExpenses[i].date
             }
 
             clubExpenses.push(obj);
