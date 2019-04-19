@@ -224,8 +224,9 @@ app.post('/transaction', (req, res) => {
             name: req.body.name,
             transaction: req.body.amount,
             where: req.body.where,
-            date: req.body.date
+            date: getD()
     }
+    console.log(res.body);
     new Expenses(newExpense)
             .save()
             .then(expense => {
@@ -448,4 +449,17 @@ function getExpenses(myExpenses, code, user) {
     }
 
     return clubExpenses;
+}
+
+function getD()
+{
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1; // January is 0!
+    var yyyy = today.getFullYear();
+    if(dd<10){dd='0'+dd} if(mm<10){mm='0'+mm}
+    today = yyyy+"/"+mm+"/"+dd;
+    return today;
+    //document.getElementsByName("date").value = today;
+    
 }
