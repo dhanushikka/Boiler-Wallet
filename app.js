@@ -224,9 +224,14 @@ app.post('/transaction', (req, res) => {
             name: req.body.name,
             transaction: req.body.amount,
             where: req.body.where,
+<<<<<<< HEAD
             date: getD()
     }
     console.log(res.body);
+=======
+            date: req.body.date
+    }
+>>>>>>> 782162fa1cf150971f942280f223ddd6a170215c
     new Expenses(newExpense)
             .save()
             .then(expense => {
@@ -449,6 +454,7 @@ function getExpenses(myExpenses, code, user) {
     }
 
     return clubExpenses;
+<<<<<<< HEAD
 }
 
 function getD()
@@ -462,4 +468,6 @@ function getD()
     return today;
     //document.getElementsByName("date").value = today;
     
+=======
+>>>>>>> 782162fa1cf150971f942280f223ddd6a170215c
 }
