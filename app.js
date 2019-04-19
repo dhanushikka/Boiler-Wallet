@@ -183,6 +183,7 @@ app.get('/expenses', (req, res) => {
     var clubCode = req.query.code;
     currentClubCode = clubCode;
     console.log(clubCode);
+    console.log(req.body.date);
 
     Expenses.find({code: clubCode}, function(err, myExpenses) {
 
