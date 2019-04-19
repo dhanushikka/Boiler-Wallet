@@ -17,7 +17,12 @@ const ExpenseSchema = new Schema({
     where:{
         type: String,
         required: true
-    }
+    },
+    date:{
+        type: String,
+        required: true
+    },
+    
 });
 
 module.exports = mongoose.model('Expenses', ExpenseSchema);
