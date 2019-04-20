@@ -2,49 +2,64 @@
 <link rel="stylesheet" href="/css/clubs.css" type="text/css">
 
 <body>
-  <div class="sidenav">
-    <h1>Clubs</h1>
-    {{#unless admin}}
-    <form class="myClubs" method = "POST" action="/myclubs">
-      <button class="btn" name="myClubs"><i class="fas fa-club"></i> My Clubs</button>
-    </form>
-    <form class="myClubs" method = "GET" action="/clubs">
-      <button class="btn" name="myClubs"><i class="fas fa-club"></i> All Clubs</button>
-    </form>
-    {{/unless}}
-    {{#if admin}}
-    <form class="myClubs" method = "GET" action="/addclub">
-      <button class="btn" name="myClubs"><i class="fas fa-club"></i> Add a club</button>
-    </form>
-    {{/if}}
- 
-    
-    <a class="navScroll" href="/"><i class="fal fa-sign-out"></i></a>
-  </div>
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+      <ul class="nav navbar-nav navbar-right">
 
-  <!-- Page Content -->
-    <div class="container">
-      <div class="row">
+        {{#unless admin}}
+            <li><form class="myClubs" method = "POST" action="/myclubs">
+                <button class="btn" name="myClubs"><i class="fas fa-club"></i> My Clubs</button>
+              </form>
+          </li>
+          <li>
+              <form class="myClubs" method = "GET" action="/clubs">
+                <button class="btn" name="myClubs"><i class="fas fa-club"></i> All Clubs</button>
+              </form>
+          </li>  
+        {{/unless}}
+        {{#if admin}}
+          <li>
+            <form class="myClubs" method = "GET" action="/addclub">
+              <button class="btn" name="myClubs"><i class="fas fa-club"></i> Add a club</button>
+            </form>
+          </li>
+        {{/if}}
+         
+      </ul>
+    </div>
+  </nav>
 
-        <div class="col-lg-3 takeSpace"></div>
+  <section class="jumbotron text-center">
+      <div class="container">
+        <h1 class="jumbotron-heading">Clubs</h1>
+      </div>
+    </section>
 
-        <div class="clubSection d-inline-block col-lg-9">
-          <div class="row">
+    <div class="album text-muted">
+      <div class="container">
+
+        <div class="row">
           {{#each clubList}}
-              <div class="clubCard col-sm-3">
-                <form action="/expenseCheck" method="post">
+            <div class="card">
+              <form action="/expenseCheck" method="post">
                     <button class="btn" name="name" value="{{this}}">
                     <img class="card-img-top" src="/assets/{{this}}.png" alt="{{this}}">
                     <div class="middle">
                       <div class="text">{{this}}</div>
                     </div>
                   </button>
-                </form>
-              </div>
-            {{/each}}
-          </div>
-    </div>
+              </form>
+            </div>
+          {{/each}}
+        </div>
 
-  </div>
-      <!-- /.container -->
+      </div>
+    </div>
+  <nav class="navbar navbar-inverse navbar-fixed-bottom">
+    <div class="container-fluid">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a class="navScroll" href="/"><i class="fal fa-sign-out"></i></a></li>      
+      </ul>
+    </div>
+  </nav>
 </body>

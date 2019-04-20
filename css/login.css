@@ -115,6 +115,13 @@ body {
   background-color: black;
 }
 
+.login1 {
+  padding-top: 50px;
+  text-align: center;
+  padding-left: 50px;
+  padding-bottom: 50px;
+}
+
 .sigin-in {
   padding-top: 40px;
   padding-bottom: 40px;
@@ -122,6 +129,7 @@ body {
 }
 
 .form-signin {
+  display: inline-block;
   color: black;
   font-family: 'Raleway', sans-serif;
   max-width: 300px;
