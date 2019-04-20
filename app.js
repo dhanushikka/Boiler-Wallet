@@ -131,14 +131,14 @@ app.post('/download', (req,res) => {
 app.post('/createclub', (req,res) => {
     console.log(req.body);
     const newClub = {
-                title: req.body.title,
-                code: req.body.code,
-                budget: req.body.budget
+                title: req.body.title,
+                code: req.body.code,
+                budget: req.body.budget
         }
         new Club(newClub)
-                .save()
-                .then(club => {
-                    console.log("success");
+                .save()
+                .then(club => {
+                    console.log("success");
         })
     res.redirect('clubs');
         
