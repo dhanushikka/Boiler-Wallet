@@ -398,7 +398,7 @@ app.post('/sign-in-submit', (req, res) => {
     }
 });
 
-const port = 5061;
+const port = process.env.PORT || 5061;
 
 server = app.listen(port, () => {
     console.log(`Server started: ${port}`);
