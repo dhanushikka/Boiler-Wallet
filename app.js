@@ -130,16 +130,16 @@ app.post('/download', (req,res) => {
 
 app.post('/createclub', (req,res) => {
     console.log(req.body);
-    // const newClub = {
-    //             title: req.body.title,
-    //             code: req.body.code,
-    //             budget: req.body.budget
-    //     }
-    //     new Club(newClub)
-    //             .save()
-    //             .then(club => {
-    //                 console.log("success");
-    //     })
+    const newClub = {
+                title: req.body.title,
+                code: req.body.code,
+                budget: req.body.budget
+        }
+        new Club(newClub)
+                .save()
+                .then(club => {
+                    console.log("success");
+        })
     res.redirect('clubs');
         
 }); 
@@ -183,6 +183,7 @@ app.get('/expenses', (req, res) => {
     var clubCode = req.query.code;
     currentClubCode = clubCode;
     console.log(clubCode);
+    console.log(req.body.date);
 
     Expenses.find({code: clubCode}, function(err, myExpenses) {
 
@@ -207,9 +208,17 @@ app.get('/expenses', (req, res) => {
 });
 
 app.get('/check', (req,res) => {
-    res.render('check', {
-        
-    });
+    if(currentUserName === "admin"){
+        console.log("admin");
+        res.render('check', {
+            admin: true
+        });
+    }
+    else{
+        res.render('check', {
+            admin: false
+        });
+    }
 });
 
 app.get('/sign-up', (req,res) => {
@@ -222,8 +231,10 @@ app.post('/transaction', (req, res) => {
             code: currentClubCode,
             name: req.body.name,
             transaction: req.body.amount,
-            where: req.body.where
+            where: req.body.where,
+            date: getD()
     }
+    console.log(res.body);
     new Expenses(newExpense)
             .save()
             .then(expense => {
@@ -257,9 +268,6 @@ app.post('/register', (req, res) => {
                 reg:true
             });
     });
-
-    
-
      
 });
 
@@ -437,7 +445,8 @@ function getExpenses(myExpenses, code, user) {
             var obj = {
                 name: myExpenses[i].name,
                 transaction: myExpenses[i].transaction,
-                where: myExpenses[i].where
+                where: myExpenses[i].where,
+                date: myExpenses[i].date
             }
 
             clubExpenses.push(obj);
@@ -445,4 +454,17 @@ function getExpenses(myExpenses, code, user) {
     }
 
     return clubExpenses;
+}
+
+function getD()
+{
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1; // January is 0!
+    var yyyy = today.getFullYear();
+    if(dd<10){dd='0'+dd} if(mm<10){mm='0'+mm}
+    today = yyyy+"/"+mm+"/"+dd;
+    return today;
+    //document.getElementsByName("date").value = today;
+    
 }

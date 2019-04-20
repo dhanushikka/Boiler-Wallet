@@ -5,22 +5,27 @@ body {
   color: black;
 }
 
-.signout {
-    float: right;
-    padding-right: 30px;
-    padding-top: 20px;
-}
-
 .navbar-fixed-top {
   background: none;
   border: none;
+  padding: 15px;
 }
 
-.expenses {
+.navScroll, .fas, .fal {
+  font-size: 20px;
+  color: black;
+  position: relative;
+  display: block;
+}
+
+.signout {
+  margin-top: -5px;
+}
+
+.expenses, li > form > button {
   color: black;
   text-align: left;
 }
-
 
 div.navbar1 {
     overflow: hidden;
@@ -34,9 +39,6 @@ div.navbar1 {
     float: right;
   }
 
-  .container, form {
-    padding-top: 50px; 
-}
 
 .single {
   padding: 30px 15px;
@@ -137,8 +139,4 @@ div.navbar1 {
   
   .login {
     color: white;
-  }
-
-  .csvbtn {
-    padding-top: 48px; 
   }
