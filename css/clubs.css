@@ -6,14 +6,20 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
-.navbar-fixed-top {
-  background: none;
+.navbar-inverse {
+  background: rgb(92, 92, 92);
   border: none;
 }
 
 .navbar-fixed-bottom {
   background: none;
   border: none;
+}
+
+li {
+  list-style: none;
+  float: left;
+  background-color: none;
 }
 
 a.navScroll {
@@ -25,9 +31,6 @@ a.navScroll {
   color: black;
 }
 
-a.navScroll:hover {
-  color: rgb(0, 145, 255);
-}
 
 .navbar-inverse .navbar-nav>li>a:hover {
   color: black;
@@ -43,9 +46,25 @@ a.scroll-down:hover, a.navScroll:hover {
   color: rgb(90, 91, 94);
 }
 
-.btn {
-  padding: 20px 20px 0px 10px;
+.btn1 {
+  border: none;
+  padding: 15px;
   font-size: 15px;
+  width: 100%;
+  color: white;
+  background-color: rgb(92, 92, 92);
+}
+
+.btn {
+  padding: 15px;
+  font-size: 15px;
+  width: 100%;
+  color: white;
+  background-color: white;
+}
+
+form {
+  background-color: none;
 }
 
 .btn:hover {
@@ -138,4 +157,29 @@ a.scroll-down:hover, a.navScroll:hover {
 
 .card-text {
   font-size: 85%;
+}
+
+@media only screen and (max-width: 600px) {
+  .flex-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .card {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+  }
+}
+
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.row {
+  padding-left: 30px;
+  padding-right: 30px;
 }

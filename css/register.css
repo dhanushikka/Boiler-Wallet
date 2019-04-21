@@ -112,3 +112,9 @@ li {
     font-size: 7px;
     position: absolute;
 }
+
+@media only screen and (max-width: 600px) {
+    .signup-form {
+        margin-top: 80px;
+    }
+}
