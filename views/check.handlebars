@@ -4,7 +4,21 @@
 <h4>Sorry, you can't view expense information</h4>
 </font>
 {{else}}
-<h1>Check</h1>
+<form class="myClubs" method = "GET" action="/clubs">
+    <button class="btn" name="myClubs"><i class="fas fa-chevron-circle-left"></i></button>
+</form>
+
+<form class="expform-signin" method = "POST" action="/codeverify">
+    <h2 class="form-signin-heading">Permission Check</h2>
+
+    <label for="inputPassword" class="sr-only">Enter Club Code</label>
+    <input type="text" id="inputPassword" class="form-control" name="code" placeholder="Club Code" >
+
+    <div class="checkbox">
+    </div>
+    <input type = "submit" value = "Submit">
+           
+</form>
 {{/if}}
 
 

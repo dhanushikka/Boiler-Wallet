@@ -18,7 +18,7 @@ var dbConnection = mongoose.connect('mongodb+srv://dravicha:cs252@boiler-wallet-
 .then(()=> console.log('Mongo connected'))
 .catch(err => console.log(err));
 
-var currentUserCodes, currentUserName, globalClubList, currentClubCode, sum = 0;
+var currentUserCodes, currentUserName, globalClubList, currentClubCode,currentClubName, sum = 0;
 const saltRounds = 10;
 
 require('./models/User');
@@ -28,18 +28,6 @@ const User = mongoose.model('Users');
 const Club = mongoose.model('Clubs');
 const Expenses = mongoose.model('Expenses');
 var checked = false, exp = false;
-
-// const newExpense = {
-//             code: 'WISP123',
-//             name: 'sam',
-//             transaction: 25,
-//             where: 'Donation'
-//         }
-//         new Expenses(newExpense)
-//             .save()
-//             .then(expense => {
-//                 console.log("success");
-//             })
 
 // telling the system we want to use handlebars template engine
 app.engine('handlebars', exphbs({
@@ -74,7 +62,7 @@ app.get('/', (req,res) => {
     ABOUT page
 */
 app.get('/about', (req,res) => {
-    res.render('ABOUT');
+    res.render('about');
 });
 
 
@@ -92,12 +80,12 @@ app.get('/contact', (req,res) => {
 app.get('/clubs', (req,res) => {
     var clubList;
     checked = false;
-    console.log("All clubs")
+    //console.log("All clubs")
     Club.find({}, function (err, myClubs){
         if(myClubs!=null){
             clubList = getClubs(myClubs);
             globalClubList = clubList;
-            console.log(clubList);
+            //console.log(clubList);
             if(currentUserName === "admin"){
                 res.render('clubs', {
                     clubList:clubList,
@@ -129,7 +117,7 @@ app.post('/download', (req,res) => {
 }); 
 
 app.post('/createclub', (req,res) => {
-    console.log(req.body);
+
     const newClub = {
                 title: req.body.title,
                 code: req.body.code,
@@ -170,7 +158,7 @@ app.post('/myclubs', (req,res) => {
                 }); 
         }
         checked = false;
-        console.log(clubList);
+
     });     
 });
 
@@ -182,14 +170,13 @@ app.get('/expenses', (req, res) => {
    
     var clubCode = req.query.code;
     currentClubCode = clubCode;
-    console.log(clubCode);
-    console.log(req.body.date);
+    
 
     Expenses.find({code: clubCode}, function(err, myExpenses) {
 
         if(myExpenses != null) {
             var clubExpenses = getExpenses(myExpenses, clubCode, currentUserName);
-            console.log("Array: " + clubExpenses);
+
         }
 
         // Club.find({code: clubCode}, function(err, currClub) {
@@ -209,7 +196,7 @@ app.get('/expenses', (req, res) => {
 
 app.get('/check', (req,res) => {
     if(currentUserName === "admin"){
-        console.log("admin");
+    
         res.render('check', {
             admin: true
         });
@@ -234,7 +221,7 @@ app.post('/transaction', (req, res) => {
             where: req.body.where,
             date: getD()
     }
-    console.log(res.body);
+
     new Expenses(newExpense)
             .save()
             .then(expense => {
@@ -247,6 +234,35 @@ app.post('/transaction', (req, res) => {
            code: currentClubCode
         }
     }));
+});
+
+app.post('/codeverify', (req,res) => {
+    console.log(req.body);
+    Club.findOne({title: currentClubName}, function(err, myClub){
+        if(err){
+            res.redirect('clubs');
+        }
+        if(req.body.code === myClub.code){
+
+            /* TODO: find and update */
+            
+
+
+            /* end of find and update */ 
+
+
+            res.redirect(url.format({
+                pathname:"/expenses",
+                query: {
+                   code: myClub.code
+                }
+            })); 
+        }
+        else{
+            res.redirect('clubs');
+        }
+        
+    });
 });
 
 app.post('/register', (req, res) => {
@@ -272,9 +288,10 @@ app.post('/register', (req, res) => {
 });
 
 app.post('/expenseCheck', (req, res) => {
+    currentClubName = req.body.name;
     exp = false;
     if(checked == true){
-        console.log(req.body.name + " " +checked);
+      
         Club.findOne({title: req.body.name}, function(err, myClub){
             res.redirect(url.format({
                 pathname:"/expenses",
@@ -287,14 +304,13 @@ app.post('/expenseCheck', (req, res) => {
     }
     else{
         Club.findOne({title: req.body.name}, function(err, myClub){
-            console.log(myClub);
+
             User.findOne({name: currentUserName}, function(err, myUser){
-                console.log(myUser);
+  
                 for(var i = 0; i < myUser.codes.length ; i++){
                     if(myClub.code === myUser.codes[i]){
                         exp = true;
-                        console.log("g: " + myClub.code);
-                        console.log("u: " +myUser.codes[i]);
+
                         res.redirect(url.format({
                             pathname:"/expenses",
                             query: {
@@ -303,7 +319,7 @@ app.post('/expenseCheck', (req, res) => {
                         }));
                     }
                 }
-                console.log(req.body);
+    
             
                 if(exp == false)
                 res.redirect(url.format({
