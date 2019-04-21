@@ -469,7 +469,7 @@ function getExpenses(myExpenses, code, user) {
         }
     }
 
-    return clubExpenses;
+    return clubExpenses.reverse();
 }
 
 function getD()
