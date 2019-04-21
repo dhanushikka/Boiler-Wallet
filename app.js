@@ -1,3 +1,10 @@
+const express = require('express')
+const exphbs  = require('express-handlebars');
+var bodyParser = require('body-parser');
+const url = require('url');
+const bcrypt = require('bcrypt');
+
+
 const app = express();
 
 const mongoose = require('mongoose');
@@ -237,7 +244,7 @@ app.post('/codeverify', (req,res) => {
         }
         if(req.body.code === myClub.code){
 
-            /* TODO: find and update */
+            /* TODO: find and update *
             
 
 
