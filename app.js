@@ -5,6 +5,8 @@ const url = require('url');
 const bcrypt = require('bcrypt');
 
 
+
+
 const app = express();
 
 const mongoose = require('mongoose');
@@ -166,6 +168,7 @@ app.post('/myclubs', (req,res) => {
 /*
     EXPENSES PAGE
 */
+
 app.get('/expenses', (req, res) => {
    
     var clubCode = req.query.code;
@@ -245,8 +248,9 @@ app.post('/codeverify', (req,res) => {
         if(req.body.code === myClub.code){
 
             /* TODO: find and update */
-            
-
+            User.updateOne({name: currentUserName}, {$push: {codes: myClub.code}}, function(err, match){
+                    console.log("Club added to user's list!");
+            });
 
             /* end of find and update */ 
 
@@ -291,7 +295,7 @@ app.post('/expenseCheck', (req, res) => {
     currentClubName = req.body.name;
     exp = false;
     if(checked == true){
-      
+        console.log("clicked club:", req.body.name);
         Club.findOne({title: req.body.name}, function(err, myClub){
             res.redirect(url.format({
                 pathname:"/expenses",
@@ -469,7 +473,7 @@ function getExpenses(myExpenses, code, user) {
         }
     }
 
-    return clubExpenses;
+    return clubExpenses.reverse();
 }
 
 function getD()
