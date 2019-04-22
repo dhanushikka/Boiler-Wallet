@@ -16,19 +16,24 @@ body {
   border: none;
 }
 
+.navbar-inverse .navbar-collapse {
+  margin-right: 15px;
+}
+
 li {
   list-style: none;
   float: left;
   background-color: none;
+  padding-left: 10px;
 }
 
 a.navScroll {
   font-size: 25px;
-  padding-left: 10px;
-  padding-bottom: 20px;
+  padding-bottom: 8px;
+  padding-right: 10px;
   bottom: 0;
   position: absolute;
-  color: black;
+  color: white;
 }
 
 
@@ -43,7 +48,7 @@ a.scroll-down {
 }
 
 a.scroll-down:hover, a.navScroll:hover {
-  color: rgb(90, 91, 94);
+  color: rgb(194, 194, 194);
 }
 
 .btn1 {
