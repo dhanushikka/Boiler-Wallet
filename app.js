@@ -168,6 +168,7 @@ app.post('/myclubs', (req,res) => {
 /*
     EXPENSES PAGE
 */
+
 app.get('/expenses', (req, res) => {
    
     var clubCode = req.query.code;
@@ -292,7 +293,6 @@ app.post('/register', (req, res) => {
 
 app.post('/expenseCheck', (req, res) => {
     currentClubName = req.body.name;
-    
     exp = false;
     if(checked == true){
         console.log("clicked club:", req.body.name);
