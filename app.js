@@ -244,9 +244,10 @@ app.post('/codeverify', (req,res) => {
         }
         if(req.body.code === myClub.code){
 
-            /* TODO: find and update *
-            
-
+            /* TODO: find and update */
+            User.update({name: currentUserName}, {$push: {codes: myClub.code}}, function(err, match){
+                    console.log("Club added to user's list!");
+            });
 
             /* end of find and update */ 
 
