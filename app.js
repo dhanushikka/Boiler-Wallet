@@ -3,6 +3,22 @@ const exphbs  = require('express-handlebars');
 var bodyParser = require('body-parser');
 const url = require('url');
 const bcrypt = require('bcrypt');
+const multer = require("multer");
+const cloudinary = require("cloudinary");
+const cloudinaryStorage = require("multer-storage-cloudinary");
+
+cloudinary.config({
+    cloud_name: process.env.unnatipulla,
+    api_key: process.env.API_KEY,
+    api_secret: process.env.LP3uvickiJ3_F10teby9Z7YzwMQ
+    });
+    const storage = cloudinaryStorage({
+    cloudinary: cloudinary,
+    folder: "demo",
+    allowedFormats: ["jpg", "png"],
+    transformation: [{ width: 500, height: 500, crop: "limit" }]
+    });
+    const parser = multer({ storage: storage });
 
 
 const app = express();
@@ -339,7 +355,15 @@ app.post('/expenseCheck', (req, res) => {
 
 });
 
-
+app.post('/api/images', parser.single("image"), (req, res) => {
+    console.log(req.file) // to see what is returned to you
+    const image = {};
+    image.url = req.file.url;
+    image.id = req.file.public_id;
+    Image.create(image) // save image information in database
+      .then(newImage => res.json(newImage))
+      .catch(err => console.log(err));
+  });
 
 app.post('/sign-in-submit', (req, res) => {
 
