@@ -245,7 +245,7 @@ app.post('/codeverify', (req,res) => {
         if(req.body.code === myClub.code){
 
             /* TODO: find and update */
-            User.update({name: currentUserName}, {$push: {codes: myClub.code}}, function(err, match){
+            User.updateOne({name: currentUserName}, {$push: {codes: myClub.code}}, function(err, match){
                     console.log("Club added to user's list!");
             });
 
@@ -290,9 +290,10 @@ app.post('/register', (req, res) => {
 
 app.post('/expenseCheck', (req, res) => {
     currentClubName = req.body.name;
+    
     exp = false;
     if(checked == true){
-      
+        console.log("clicked club:", req.body.name);
         Club.findOne({title: req.body.name}, function(err, myClub){
             res.redirect(url.format({
                 pathname:"/expenses",
