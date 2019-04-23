@@ -13,7 +13,6 @@
     </div>
     <div class="collapse navbar-collapse navbar-right" id="myNavbar">
        {{#unless admin}}
-       <li><a class="navScroll" href="/"><font size = 4>Sign-out</font></a></li>
           <li><form class="myClubs" method = "POST" action="/myclubs">
                 <button class="btn1" name="myClubs"><i class="fas fa-club"></i> My Clubs</button>
               </form>
@@ -22,13 +21,7 @@
               <form class="myClubs" method = "GET" action="/clubs">
                 <button class="btn1" name="myClubs"><i class="fas fa-club"></i> All Clubs</button>
               </form>
-          </li> 
-           
-          {{!-- <li>
-              <form class="myClubs" method = "GET" action="/">
-                <button class="btn1" name="myClubs"><i class="fas fa-club"></i>Sign out</button>
-              </form>
-          </li>  --}}
+          </li>  
         {{/unless}}
         {{#if admin}}
           <li>
@@ -37,8 +30,7 @@
             </form>
           </li>
         {{/if}}
-        
-  
+        <li><a class="navScroll" href="/"><i class="fal fa-sign-out"></i></a></li>
     </div>
   </div>
 </nav>
